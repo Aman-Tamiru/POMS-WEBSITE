@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "首页",
+    "collection": "精选系列",
+    "catalogue": "产品目录",
+    "customDesign": "定制鞋履",
+    "wholesale": "国际批发",
+    "authenticity": "正品验证",
+    "about": "关于品牌",
+    "contact": "联系我们",
+    "adminPortal": "管理门户",
+    "sizeGuide": "尺码指南"
+  },
+  "hero": {
+    "eyebrow": "POM'S 国际女鞋品牌",
+    "title": "步履之间 优雅绽放",
+    "subtitle": "探索现代奢华轮廓、专业手工定制鞋履与面向全球市场的优质批发系列。",
+    "ctaExplore": "探索系列",
+    "ctaCustom": "专属定制",
+    "ctaWholesale": "批发洽谈"
+  },
+  "customDesign": {
+    "title": "让鞋履设计灵感成真",
+    "tagline": "您的构想，我们的工艺。",
+    "description": "上传您的鞋履设计参考图或草图，指定材质与颜色，与我们的制鞋大师直接沟通。",
+    "step1": "上传设计",
+    "step1Desc": "上传清晰的鞋款参考图或构想草图。",
+    "step2": "工艺审核",
+    "step2Desc": "POM'S 审核鞋型结构并确认可行性。",
+    "step3": "选择材质",
+    "step3Desc": "我们提供多种顶级皮料等级与报价供您选择。",
+    "step4": "确认投产",
+    "step4Desc": "确认定制方案，开启精工细作。",
+    "submitBtn": "提交定制需求"
+  },
+  "wholesale": {
+    "title": "国际批发与外贸出口",
+    "tagline": "全球鞋履直供体系",
+    "description": "为全球精品店、百货公司与鞋履零售商提供箱装规格、灵活起订量与可靠海空货运。",
+    "ctaQuote": "索取批发报价",
+    "moqLabel": "标准起订量",
+    "cartonLabel": "每箱规格"
+  },
+  "authenticity": {
+    "title": "官方正品防伪验证",
+    "tagline": "正品匠心保障",
+    "description": "每双 POM'S 正品鞋履均配备唯一防伪序列号。请在此输入查询以核验正品。",
+    "inputPlaceholder": "输入防伪代码 (例如 POMS-AUTH-...)",
+    "verifyBtn": "立即核验",
+    "scanQr": "扫描鞋盒二维码"
+  },
+  "theme": {
+    "dark": "暗黑奢华",
+    "light": "柔白雅致"
+  },
+  "footer": {
+    "brandTagline": "步履之间尽显优雅，从容自信尽显光芒。",
+    "copyright": "© 2026 POM'S 国际鞋业版权所有。",
+    "adminLink": "管理系统"
+  }
+}

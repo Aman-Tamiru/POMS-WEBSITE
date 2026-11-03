@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Home",
+    "collection": "Collection",
+    "catalogue": "Catalogue",
+    "customDesign": "Custom Design",
+    "wholesale": "Wholesale",
+    "authenticity": "Authenticity",
+    "about": "About",
+    "contact": "Contact",
+    "adminPortal": "Admin Portal",
+    "sizeGuide": "Size Guide"
+  },
+  "hero": {
+    "eyebrow": "POM'S INTERNATIONAL FOOTWEAR",
+    "title": "Elegance in Every Step",
+    "subtitle": "Discover modern luxury silhouettes, bespoke footwear engineering, and premier international wholesale collections.",
+    "ctaExplore": "Explore Collection",
+    "ctaCustom": "Create Custom Design",
+    "ctaWholesale": "Wholesale Inquiries"
+  },
+  "customDesign": {
+    "title": "Bring Your Footwear Vision to Life",
+    "tagline": "Your Design. Our Craft.",
+    "description": "Have a custom shoe silhouette or material in mind? Upload your photographs, select your preferences, and collaborate directly with our master artisans.",
+    "step1": "Upload Design",
+    "step1Desc": "Send clear pictures of your shoe reference or sketch.",
+    "step2": "Artisan Review",
+    "step2Desc": "POM'S reviews the silhouette and verifies production viability.",
+    "step3": "Select Materials",
+    "step3Desc": "We provide available leather grades, heel options, and pricing.",
+    "step4": "Order & Craft",
+    "step4Desc": "Confirm your bespoke pair and track production directly.",
+    "submitBtn": "Submit Design Request"
+  },
+  "wholesale": {
+    "title": "International Wholesale & Export",
+    "tagline": "Global Footwear Distribution",
+    "description": "Supplying boutiques, retail chains, and international distributors with precision-crafted footwear, package carton tiers, and dependable export freight.",
+    "ctaQuote": "Request Wholesale Quotation",
+    "moqLabel": "Standard MOQ",
+    "cartonLabel": "Pairs Per Carton"
+  },
+  "authenticity": {
+    "title": "Authenticity Verification",
+    "tagline": "Genuine Craftsmanship Guarantee",
+    "description": "Every genuine pair of POM'S footwear features a unique serial identifier. Verify your product directly against our database.",
+    "inputPlaceholder": "Enter Verification Code (e.g. POMS-AUTH-...)",
+    "verifyBtn": "Verify Now",
+    "scanQr": "Scan Box QR Code"
+  },
+  "theme": {
+    "dark": "Dark Theme",
+    "light": "Light Theme"
+  },
+  "footer": {
+    "brandTagline": "Elegance in every step, Confidence in every you.",
+    "copyright": "© 2026 POM'S International Footwear. All rights reserved.",
+    "adminLink": "Admin Portal"
+  }
+}

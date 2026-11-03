@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "collection": "Colección",
+    "catalogue": "Catálogo",
+    "customDesign": "Diseño a Medida",
+    "wholesale": "Venta al por Mayor",
+    "authenticity": "Autenticidad",
+    "about": "Nosotros",
+    "contact": "Contacto",
+    "adminPortal": "Portal de Administración",
+    "sizeGuide": "Guía de Tallas"
+  },
+  "hero": {
+    "eyebrow": "CALZADO INTERNACIONAL POM'S",
+    "title": "Elegancia en Cada Paso",
+    "subtitle": "Descubra siluetas de lujo moderno, calzado a medida y colecciones mayoristas para el mercado global.",
+    "ctaExplore": "Explorar Colección",
+    "ctaCustom": "Crear Diseño a Medida",
+    "ctaWholesale": "Consultas Mayoristas"
+  },
+  "customDesign": {
+    "title": "Haga Realidad su Diseño de Calzado",
+    "tagline": "Su Diseño. Nuestro Arte.",
+    "description": "¿Tiene una silueta o material en mente? Suba sus fotografías y colabore directamente con nuestros maestros artesanos.",
+    "step1": "Subir Referencia",
+    "step1Desc": "Envíe fotos claras de su diseño o boceto.",
+    "step2": "Revisión Artesanal",
+    "step2Desc": "POM'S evalúa la viabilidad y estructura de producción.",
+    "step3": "Elegir Materiales",
+    "step3Desc": "Le informamos de los tipos de cuero y precios disponibles.",
+    "step4": "Confirmar y Fabricar",
+    "step4Desc": "Confirme su pedido e iniciamos la producción artesanal.",
+    "submitBtn": "Enviar Solicitud de Diseño"
+  },
+  "wholesale": {
+    "title": "Venta Mayorista y Exportación Internacional",
+    "tagline": "Distribución Global de Calzado",
+    "description": "Suministro directo para boutiques, tiendas departamentales y cadenas minoristas con empaque en cajas y flete confiable.",
+    "ctaQuote": "Solicitar Cotización Mayorista",
+    "moqLabel": "Pedido Mínimo (MOQ)",
+    "cartonLabel": "Pares por Caja"
+  },
+  "authenticity": {
+    "title": "Verificación de Autenticidad",
+    "tagline": "Garantía Oficial de Artesanía",
+    "description": "Cada par auténtico de calzado POM'S cuenta con un código de serie único. Verifique su producto en nuestra base de datos.",
+    "inputPlaceholder": "Ingrese código de verificación (ej. POMS-AUTH-...)",
+    "verifyBtn": "Verificar Ahora",
+    "scanQr": "Escanear Código QR de la Caja"
+  },
+  "theme": {
+    "dark": "Tema Oscuro",
+    "light": "Tema Claro"
+  },
+  "footer": {
+    "brandTagline": "Elegancia en cada paso, Confianza en cada versión de usted.",
+    "copyright": "© 2026 Calzado Internacional POM'S. Todos los derechos reservados.",
+    "adminLink": "Portal de Administración"
+  }
+}

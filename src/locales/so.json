@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "home": "Hoyga",
+    "collection": "Xulashada",
+    "catalogue": "Buugga Kabaha",
+    "customDesign": "Naqshad Gaar Ah",
+    "wholesale": "Jumlo & Dhoofin",
+    "authenticity": "Xaqiijinta Asalka",
+    "about": "Nagu Saabsan",
+    "contact": "Nala Soo Xiriir",
+    "adminPortal": "Bogga Maamulka",
+    "sizeGuide": "Hagaha Cabbirka"
+  },
+  "hero": {
+    "eyebrow": "POM'S KABAHA DUMARKA EE CAALAMIGA AH",
+    "title": "Xarrago Tallaabo Kasta",
+    "subtitle": "Baro kabaha dumarka ee casriga ah, naqshadaha gaarka ah ee gacanta lagu farsameeyo, iyo adeegyada jumlada ee caalamiga ah.",
+    "ctaExplore": "Baadh Kabaha",
+    "ctaCustom": "Dalbo Naqshad Gaar Ah",
+    "ctaWholesale": "Weydiimo Jumlo"
+  },
+  "customDesign": {
+    "title": "U Rog Fikirkaaga Kabo Dhab Ah",
+    "tagline": "Naqshadaadu Waa Fankeena.",
+    "description": "Ma haysaa naqshad kabo oo aad jeceshahay? Soo geli sawirradaada, dooro nooca maqaarka iyo midabka, oo si toos ah ula shaqee farsamayaqaannadayada.",
+    "step1": "Soo Geli Sawirka",
+    "step1Desc": "Soo dir sawirro cad oo muujinaya kabaha aad rabto ama sawir-gacmeedkaaga.",
+    "step2": "Dib-u-eegis Farsamo",
+    "step2Desc": "POM'S wuxuu xaqiijinayaa tayada iyo sida ugu habboon ee loo samayn karo.",
+    "step3": "Dooro Maqaarka",
+    "step3Desc": "Waxaan kuu soo bandhigeynaa noocyada maqaarka ee bannaan iyo qiimaha mid kasta.",
+    "step4": "Xaqiiji & Bilow",
+    "step4Desc": "Xaqiiji dalabkaaga waxaana bilaabanaysa samaynta gacanta ee heerka sare ah.",
+    "submitBtn": "Gudbi Dalabka Naqshadda"
+  },
+  "wholesale": {
+    "title": "Jumlo Caalamiya & Dhoofin",
+    "tagline": "Qaybinta Kabaha Caalamka",
+    "description": "Waxaan dukaamada iyo ganacsatada caalamka siinaa kabo tayo sare leh oo kartoonno ku xiran, tirooyin dabacsan, iyo xamuul xaqiiqo ah.",
+    "ctaQuote": "Dalbo Qiimaha Jumlada",
+    "moqLabel": "Tirada Ugu Yar (MOQ)",
+    "cartonLabel": "Lammaane Kartoonkiiba"
+  },
+  "authenticity": {
+    "title": "Xaqiijinta Asalka Kabaha",
+    "tagline": "Damaanad Qaadka Tayada Asalka Ah",
+    "description": "Kabo kasta oo asal ah oo POM'S leedahay waxay wadataa lambar aqoonsi oo gaar ah. Halkan ku xaqiiji kabahaaga si toos ah.",
+    "inputPlaceholder": "Geli koodhka xaqiijinta (tusaale: POMS-AUTH-...)",
+    "verifyBtn": "Xaqiiji Hadda",
+    "scanQr": "Iskaan Garee QR Koodhka Sanduuqa"
+  },
+  "theme": {
+    "dark": "Muuqaalka Madow",
+    "light": "Muuqaalka Cad"
+  },
+  "footer": {
+    "brandTagline": "Xarrago tallaabo kasta, Kalsooni dabeecad kasta.",
+    "copyright": "© 2026 POM'S International Footwear. Dhammaan xuquuqda way dhowran tahay.",
+    "adminLink": "Bogga Maamulka"
+  }
+}

@@ -1,0 +1,993 @@
+﻿ POMS PRODUCT MANAGEMENT IMPLEMENTATION AUDIT
+
+
+========================================
+FILE: src\app\admin\AdminDashboardClient.tsx
+========================================
+
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
+import {
+  Package,
+  Layers,
+  MessageSquare,
+  FileSpreadsheet,
+  Palette,
+  Globe,
+  Settings,
+  ShieldCheck,
+  TrendingUp,
+  Image as ImageIcon,
+  Users,
+  Compass,
+  FileText,
+  Sliders,
+  Activity,
+  Plus,
+  Camera,
+  Send,
+  Eye,
+  LogOut,
+} from "lucide-react";
+
+export default function AdminDashboardPage() {
+  const router = useRouter();
+
+const handleLogout = async () => {
+  const supabase = createClient();
+
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    alert("Unable to sign out. Please try again.");
+    return;
+  }
+
+  router.replace("/admin/login");
+  router.refresh();
+};
+  const [activeTab, setActiveTab] = useState<string>("overview");
+
+  // KPI Metrics for mobile dashboard
+  const metrics = [
+    { label: "Active Inquiries", val: "4 New", icon: Compass, alert: true },
+    { label: "Unread Messages", val: "7 Live", icon: MessageSquare, alert: true },
+    { label: "Pending Quotes", val: "3 Drafts", icon: FileSpreadsheet, alert: false },
+    { label: "In Production", val: "12 Orders", icon: Package, alert: false },
+  ];
+
+  // The 19 Administrative Sections
+  const adminSections = [
+    { id: "dashboard", label: "Dashboard", icon: TrendingUp, cat: "Core" },
+    { id: "homepage", label: "Homepage Editor", icon: Eye, cat: "Content" },
+    { id: "products", label: "Product Manager", icon: Package, cat: "Catalogue" },
+    { id: "collections", label: "Collection Manager", icon: Layers, cat: "Catalogue" },
+    { id: "media", label: "Media Library", icon: ImageIcon, cat: "Assets" },
+    { id: "designs", label: "Custom Design Inquiries", icon: Compass, cat: "Sales" },
+    { id: "messages", label: "Customer Messages", icon: MessageSquare, cat: "Sales" },
+    { id: "customers", label: "Customer Directory", icon: Users, cat: "Sales" },
+    { id: "quotations", label: "Quotations (5 Currencies)", icon: FileSpreadsheet, cat: "Sales" },
+    { id: "orders", label: "Order Production Tracker", icon: FileText, cat: "Sales" },
+    { id: "translations", label: "Translation Matrix (5 Langs)", icon: Globe, cat: "Content" },
+    { id: "layout", label: "Catalogue Layout Editor", icon: Sliders, cat: "Content" },
+    { id: "theme", label: "Theme & Styling Tokens", icon: Palette, cat: "Settings" },
+    { id: "wholesale", label: "Wholesale & Carton Rules", icon: Package, cat: "Settings" },
+    { id: "shipping", label: "Shipping & Customs Rules", icon: Settings, cat: "Settings" },
+    { id: "authenticity", label: "Authenticity Code Generator", icon: ShieldCheck, cat: "Security" },
+    { id: "staff", label: "Staff & Permissions (RBAC)", icon: Users, cat: "Security" },
+    { id: "logs", label: "Audit & Activity Logs", icon: Activity, cat: "Security" },
+    { id: "settings", label: "Website Settings", icon: Settings, cat: "Settings" },
+  ];
+
+  return (
+    <div className="min-h-screen bg-[var(--background)] pb-24 text-[var(--foreground)]">
+      {/* Mobile-Friendly Top Bar */}
+      <header className="sticky top-0 z-40 border-b border-[var(--border)] bg-[var(--surface)]/95 px-4 py-3 backdrop-blur-md flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-8 bg-[var(--gold)] text-black font-serif font-bold flex items-center justify-center text-sm">
+            P
+          </div>
+          <div>
+            <h1 className="font-serif text-sm font-bold tracking-wider text-[var(--gold)]">
+              POM&apos;S OS
+            </h1>
+            <p className="text-[10px] text-[var(--foreground-muted)]">Owner / Android Console</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Link
+            href="/"
+            target="_blank"
+            className="flex items-center gap-1 border border-[var(--border)] px-2.5 py-1 text-[11px] text-[var(--foreground)] hover:border-[var(--gold)]"
+          >
+            <Eye className="h-3 w-3 text-[var(--gold)]" />
+            <span className="hidden sm:inline">Storefront</span>
+          </Link>
+          <button
+  type="button"
+  onClick={handleLogout}
+  className="flex items-center gap-1 border border-[var(--border)] px-2.5 py-1 text-[11px] text-[var(--foreground-muted)] hover:text-red-400"
+  aria-label="Sign out"
+  title="Sign out"
+>
+  <LogOut className="h-3 w-3" />
+</button>
+        </div>
+      </header>
+
+      {/* Main Container */}
+      <main className="mx-auto max-w-5xl px-4 py-6 space-y-8">
+        {/* Quick Android Actions Tray */}
+        <section className="space-y-2">
+          <p className="font-serif text-[11px] uppercase tracking-widest text-[var(--gold)]">
+            Quick Mobile Actions
+          </p>
+          <div className="grid grid-cols-3 gap-2.5">
+            <button
+              onClick={() => alert("Product Creation Drawer: Ready to add shoe name, pictures, and MOQ")}
+              className="flex flex-col items-center justify-center gap-1.5 border border-[var(--border)] bg-[var(--surface)] p-3.5 text-center active:scale-95 transition hover:border-[var(--gold)]"
+            >
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--gold)]/15 text-[var(--gold)]">
+                <Plus className="h-5 w-5" />
+              </div>
+              <span className="text-[11px] font-medium">Add Product</span>
+            </button>
+
+            <button
+              onClick={() => alert("Android Camera Media Upload: Ready to capture shoe photography")}
+              className="flex flex-col items-center justify-center gap-1.5 border border-[var(--border)] bg-[var(--surface)] p-3.5 text-center active:scale-95 transition hover:border-[var(--gold)]"
+            >
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--gold)]/15 text-[var(--gold)]">
+                <Camera className="h-5 w-5" />
+              </div>
+              <span className="text-[11px] font-medium">Upload Photo</span>
+            </button>
+
+            <button
+              onClick={() => alert("Quick Customer Reply: Loading active WhatsApp & In-App threads")}
+              className="flex flex-col items-center justify-center gap-1.5 border border-[var(--border)] bg-[var(--surface)] p-3.5 text-center active:scale-95 transition hover:border-[var(--gold)]"
+            >
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--gold)]/15 text-[var(--gold)]">
+                <Send className="h-5 w-5" />
+              </div>
+              <span className="text-[11px] font-medium">Quick Reply</span>
+            </button>
+          </div>
+        </section>
+
+        {/* Real-Time Business KPI Metric Cards */}
+        <section className="space-y-2">
+          <p className="font-serif text-[11px] uppercase tracking-widest text-[var(--gold)]">
+            Live Business Status
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {metrics.map((m, i) => {
+              const Icon = m.icon;
+              return (
+                <div
+                  key={i}
+                  className="border border-[var(--border)] bg-[var(--surface)] p-4 space-y-1 relative overflow-hidden"
+                >
+                  {m.alert && (
+                    <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-[var(--gold)] animate-pulse" />
+                  )}
+                  <Icon className="h-4 w-4 text-[var(--gold)]" />
+                  <p className="font-serif text-lg font-bold text-[var(--foreground)]">{m.val}</p>
+                  <p className="text-[10px] text-[var(--foreground-muted)] uppercase tracking-wider">{m.label}</p>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* The 19 Administrative Sections Grid */}
+        <section className="space-y-3">
+          <div className="flex items-center justify-between border-b border-[var(--border)] pb-2">
+            <p className="font-serif text-xs uppercase tracking-widest text-[var(--gold)]">
+              Administrative Control Centers (19 Modules)
+            </p>
+            <span className="text-[10px] text-[var(--foreground-muted)]">Full Android Access</span>
+          </div>
+
+          <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+            {adminSections.map((sec) => {
+              const Icon = sec.icon;
+              return (
+                <button
+                  key={sec.id}
+                  onClick={() =>
+                    alert(
+                      `Opening Module: ${sec.label}\n\nConnected to PostgreSQL table and active state machine.`
+                    )
+                  }
+                  className="flex items-center justify-between border border-[var(--border)] bg-[var(--surface)] p-3.5 text-left transition hover:border-[var(--gold)] hover:bg-[var(--surface-hover)] active:scale-[0.99]"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-sm border border-[var(--border)] bg-[var(--background)] text-[var(--gold)]">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-semibold text-[var(--foreground)]">{sec.label}</p>
+                      <p className="text-[10px] text-[var(--foreground-muted)]">{sec.cat}</p>
+                    </div>
+                  </div>
+                  <span className="text-xs text-[var(--gold)]">→</span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* Recent Activity Log Snapshot */}
+        <section className="border border-[var(--border)] bg-[var(--surface)] p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <h3 className="font-serif text-sm font-semibold text-[var(--foreground)]">
+              Recent Administrative Activity
+            </h3>
+            <span className="text-[10px] text-[var(--gold)]">Database Synced</span>
+          </div>
+          <div className="space-y-2 text-xs text-[var(--foreground-muted)] divide-y divide-[var(--border)]/40">
+            <div className="pt-2 flex justify-between">
+              <span>Owner Bootstrap Initialized</span>
+              <span className="font-mono text-[10px]">Just now</span>
+            </div>
+            <div className="pt-2 flex justify-between">
+              <span>Homepage Layout Verified (5 sections active)</span>
+              <span className="font-mono text-[10px]">Today</span>
+            </div>
+            <div className="pt-2 flex justify-between">
+              <span>Multilingual Dictionaries Loaded (EN, AM, ZH, HI, ES)</span>
+              <span className="font-mono text-[10px]">Today</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Persistent Mobile Bottom Navigation Bar */}
+      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--border)] bg-[var(--surface)]/98 backdrop-blur-xl px-4 py-2 flex items-center justify-around text-center text-[10px] text-[var(--foreground-muted)]">
+        <button
+          onClick={() => setActiveTab("overview")}
+          className={`flex flex-col items-center gap-1 ${
+            activeTab === "overview" ? "text-[var(--gold)] font-bold" : ""
+          }`}
+        >
+          <TrendingUp className="h-4 w-4" />
+          <span>Home</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("products")}
+          className={`flex flex-col items-center gap-1 ${
+            activeTab === "products" ? "text-[var(--gold)] font-bold" : ""
+          }`}
+        >
+          <Package className="h-4 w-4" />
+          <span>Catalogue</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("inbox")}
+          className={`flex flex-col items-center gap-1 relative ${
+            activeTab === "inbox" ? "text-[var(--gold)] font-bold" : ""
+          }`}
+        >
+          <span className="absolute -top-1 right-2 h-2 w-2 rounded-full bg-[var(--gold)]" />
+          <MessageSquare className="h-4 w-4" />
+          <span>Messages</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("quotes")}
+          className={`flex flex-col items-center gap-1 ${
+            activeTab === "quotes" ? "text-[var(--gold)] font-bold" : ""
+          }`}
+        >
+          <FileSpreadsheet className="h-4 w-4" />
+          <span>Quotes</span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab("settings")}
+          className={`flex flex-col items-center gap-1 ${
+            activeTab === "settings" ? "text-[var(--gold)] font-bold" : ""
+          }`}
+        >
+          <Settings className="h-4 w-4" />
+          <span>Settings</span>
+        </button>
+      </nav>
+    </div>
+  );
+}
+
+
+
+========================================
+FILE: src\app\admin\page.tsx
+========================================
+
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
+import AdminDashboardClient from "./AdminDashboardClient";
+
+export const dynamic = "force-dynamic";
+
+export default async function AdminDashboardPage() {
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/admin/login");
+  }
+
+  const admin = createAdminClient();
+
+  const { data: staffRole, error } = await admin
+    .from("staff_roles")
+    .select("role")
+    .eq("profile_id", user.id)
+    .eq("active", true)
+    .in("role", ["owner", "super_admin"])
+    .limit(1)
+    .maybeSingle();
+
+  if (error || !staffRole) {
+    redirect("/admin/login?error=unauthorized");
+  }
+
+  return <AdminDashboardClient />;
+}
+
+FILE NOT FOUND: src\lib\data.ts
+
+
+========================================
+FILE: src\lib\supabase\admin.ts
+========================================
+
+
+import { createClient } from "@supabase/supabase-js";
+
+export function createAdminClient() {
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const secretKey = process.env.SUPABASE_SECRET_KEY;
+
+  if (!supabaseUrl || !secretKey) {
+    throw new Error(
+      "Missing SUPABASE_URL or SUPABASE_SECRET_KEY in server environment."
+    );
+  }
+
+  return createClient(supabaseUrl, secretKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+}
+
+
+
+========================================
+FILE: package.json
+========================================
+
+{
+  "name": "poms-international-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.49.1",
+    "lucide-react": "^0.475.0",
+    "next": "15.1.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/postcss": "^4.0.8",
+    "@types/node": "^22.13.4",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^9.20.1",
+    "eslint-config-next": "15.1.7",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^4.0.8",
+    "typescript": "^5.7.3"
+  }
+}
+
+
+
+========================================
+FILE: supabase\migrations\0001_initial_schema.sql
+========================================
+
+-- ==============================================================================
+-- POM'S INTERNATIONAL FOOTWEAR PLATFORM
+-- INITIAL DATABASE SCHEMA & COMPLETE ROW LEVEL SECURITY (RLS) POLICIES
+-- Target Engine: PostgreSQL 15+ (Supabase)
+-- Migration: 0001_initial_schema.sql
+-- ==============================================================================
+
+-- 1. EXTENSIONS
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+
+-- 2. CUSTOM TYPES & ENUMS
+DO $$ BEGIN
+    CREATE TYPE public.app_role AS ENUM (
+        'owner', 
+        'super_admin', 
+        'product_manager', 
+        'content_manager', 
+        'customer_support', 
+        'wholesale_manager'
+    );
+EXCEPTION WHEN duplicate_object THEN null; END $$;
+
+DO $$ BEGIN
+    CREATE TYPE public.shoe_type AS ENUM (
+        'flat', 
+        'heel', 
+        'pump', 
+        'slipper', 
+        'slide', 
+        'sandal', 
+        'boot', 
+        'bespoke'
+    );
+EXCEPTION WHEN duplicate_object THEN null; END $$;
+
+DO $$ BEGIN
+    CREATE TYPE public.conversation_status AS ENUM (
+        'open', 
+        'pending_admin', 
+        'pending_customer', 
+        'quoted', 
+        'confirmed', 
+        'closed'
+    );
+EXCEPTION WHEN duplicate_object THEN null; END $$;
+
+DO $$ BEGIN
+    CREATE TYPE public.quotation_status AS ENUM (
+        'draft', 
+        'sent', 
+        'accepted', 
+        'revision_requested', 
+        'declined', 
+        'expired'
+    );
+EXCEPTION WHEN duplicate_object THEN null; END $$;
+
+DO $$ BEGIN
+    CREATE TYPE public.order_stage AS ENUM (
+        'new_request', 
+        'under_discussion', 
+        'price_sent', 
+        'awaiting_confirmation', 
+        'confirmed', 
+        'in_production', 
+        'ready', 
+        'shipped', 
+        'completed', 
+        'cancelled'
+    );
+EXCEPTION WHEN duplicate_object THEN null; END $$;
+
+DO $$ BEGIN
+    CREATE TYPE public.authenticity_status AS ENUM (
+        'active', 
+        'inactive', 
+        'revoked'
+    );
+EXCEPTION WHEN duplicate_object THEN null; END $$;
+
+-- 3. PROFILES & STAFF ROLES
+CREATE TABLE IF NOT EXISTS public.profiles (
+    id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+    email TEXT UNIQUE NOT NULL,
+    full_name TEXT,
+    phone TEXT,
+    avatar_url TEXT,
+    preferred_language VARCHAR(10) DEFAULT 'en',
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.staff_roles (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    profile_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+    role public.app_role NOT NULL,
+    active BOOLEAN DEFAULT TRUE,
+    granted_by UUID REFERENCES public.profiles(id),
+    granted_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE(profile_id, role)
+);
+
+-- 4. COLLECTIONS & LOCALIZATION
+CREATE TABLE IF NOT EXISTS public.collections (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    slug TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT,
+    cover_image_url TEXT,
+    display_order INT DEFAULT 0,
+    is_featured BOOLEAN DEFAULT FALSE,
+    is_published BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.collection_translations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    collection_id UUID NOT NULL REFERENCES public.collections(id) ON DELETE CASCADE,
+    language VARCHAR(10) NOT NULL, -- 'en', 'am', 'so', 'zh-CN', 'hi', 'es'
+    name TEXT NOT NULL,
+    description TEXT,
+    meta_title TEXT,
+    meta_description TEXT,
+    is_reviewed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE(collection_id, language)
+);
+
+-- 5. PRODUCTS, IMAGES & LOCALIZATION
+CREATE TABLE IF NOT EXISTS public.products (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    slug TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    collection_id UUID REFERENCES public.collections(id) ON DELETE SET NULL,
+    shoe_type public.shoe_type DEFAULT 'flat',
+    description TEXT,
+    materials TEXT[] DEFAULT '{}',
+    colors TEXT[] DEFAULT '{}',
+    sizes_available TEXT[] DEFAULT '{}',
+    base_price DECIMAL(10,2),
+    currency VARCHAR(5) DEFAULT 'USD',
+    is_price_on_request BOOLEAN DEFAULT TRUE,
+    is_wholesale_available BOOLEAN DEFAULT TRUE,
+    minimum_order_quantity INT DEFAULT 1,
+    package_quantity INT DEFAULT 12,
+    is_featured BOOLEAN DEFAULT FALSE,
+    is_archived BOOLEAN DEFAULT FALSE,
+    is_published BOOLEAN DEFAULT TRUE,
+    display_order INT DEFAULT 0,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.product_images (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    product_id UUID NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
+    image_url TEXT NOT NULL,
+    alt_text TEXT,
+    display_order INT DEFAULT 0,
+    is_primary BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.product_translations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    product_id UUID NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
+    language VARCHAR(10) NOT NULL,
+    name TEXT NOT NULL,
+    description TEXT,
+    materials_description TEXT,
+    meta_title TEXT,
+    meta_description TEXT,
+    is_reviewed BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE(product_id, language)
+);
+
+-- 6. CUSTOM BESPOKE DESIGN & REALTIME CONVERSATIONS
+CREATE TABLE IF NOT EXISTS public.custom_designs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    reference_code VARCHAR(32) UNIQUE NOT NULL,
+    customer_profile_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+    guest_name TEXT NOT NULL,
+    guest_email TEXT,
+    guest_phone TEXT NOT NULL,
+    guest_country TEXT,
+    design_description TEXT NOT NULL,
+    material_preference TEXT,
+    color_preference TEXT,
+    preferred_contact_method VARCHAR(20) DEFAULT 'whatsapp',
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.conversations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    custom_design_id UUID REFERENCES public.custom_designs(id) ON DELETE SET NULL,
+    customer_profile_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+    guest_access_token VARCHAR(64) UNIQUE,
+    title TEXT NOT NULL,
+    status public.conversation_status DEFAULT 'open',
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.messages (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    conversation_id UUID NOT NULL REFERENCES public.conversations(id) ON DELETE CASCADE,
+    sender_profile_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+    is_from_admin BOOLEAN DEFAULT FALSE,
+    content TEXT NOT NULL,
+    translated_content TEXT,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.message_attachments (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    message_id UUID NOT NULL REFERENCES public.messages(id) ON DELETE CASCADE,
+    file_url TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    file_type VARCHAR(50) NOT NULL,
+    file_size_bytes BIGINT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 7. QUOTATIONS, ORDERS & STATUS AUDITING
+CREATE TABLE IF NOT EXISTS public.quotations (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    quotation_number VARCHAR(32) UNIQUE NOT NULL,
+    conversation_id UUID REFERENCES public.conversations(id) ON DELETE SET NULL,
+    customer_profile_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+    recipient_name TEXT NOT NULL,
+    recipient_email TEXT,
+    recipient_phone TEXT,
+    recipient_country TEXT,
+    currency VARCHAR(5) DEFAULT 'USD',
+    subtotal_amount DECIMAL(12,2) NOT NULL,
+    shipping_estimated_amount DECIMAL(12,2) DEFAULT 0.00,
+    total_amount DECIMAL(12,2) NOT NULL,
+    valid_until TIMESTAMPTZ NOT NULL,
+    terms_and_conditions TEXT,
+    status public.quotation_status DEFAULT 'sent',
+    created_by UUID REFERENCES public.profiles(id),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.quotation_items (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    quotation_id UUID NOT NULL REFERENCES public.quotations(id) ON DELETE CASCADE,
+    product_id UUID REFERENCES public.products(id) ON DELETE SET NULL,
+    item_title TEXT NOT NULL,
+    item_description TEXT,
+    material_grade TEXT,
+    color TEXT,
+    size_breakdown TEXT,
+    quantity INT NOT NULL,
+    package_quantity INT DEFAULT 1,
+    unit_price DECIMAL(10,2) NOT NULL,
+    total_price DECIMAL(12,2) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.orders (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_number VARCHAR(32) UNIQUE NOT NULL,
+    quotation_id UUID REFERENCES public.quotations(id) ON DELETE SET NULL,
+    customer_profile_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+    stage public.order_stage DEFAULT 'confirmed',
+    total_amount DECIMAL(12,2) NOT NULL,
+    deposit_required_percent DECIMAL(5,2) DEFAULT 50.00,
+    deposit_amount_paid DECIMAL(12,2) DEFAULT 0.00,
+    is_deposit_verified BOOLEAN DEFAULT FALSE,
+    payment_proof_url TEXT,
+    shipping_address TEXT,
+    destination_country TEXT,
+    tracking_carrier TEXT,
+    tracking_reference TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.order_status_history (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_id UUID NOT NULL REFERENCES public.orders(id) ON DELETE CASCADE,
+    previous_stage public.order_stage,
+    new_stage public.order_stage NOT NULL,
+    notes TEXT,
+    changed_by UUID REFERENCES public.profiles(id),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 8. PRODUCT AUTHENTICITY RECORDS
+CREATE TABLE IF NOT EXISTS public.authenticity_records (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    product_id UUID REFERENCES public.products(id) ON DELETE SET NULL,
+    verification_code VARCHAR(32) UNIQUE NOT NULL,
+    batch_number VARCHAR(32),
+    manufactured_date DATE,
+    status public.authenticity_status DEFAULT 'active',
+    verification_count INT DEFAULT 0,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.authenticity_verifications (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    authenticity_record_id UUID REFERENCES public.authenticity_records(id) ON DELETE CASCADE,
+    code_entered TEXT NOT NULL,
+    result_status VARCHAR(20) NOT NULL,
+    ip_hash VARCHAR(64),
+    user_agent TEXT,
+    verified_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 9. HOMEPAGE, MEDIA & AUDIT LOGS
+CREATE TABLE IF NOT EXISTS public.homepage_sections (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    section_key VARCHAR(50) UNIQUE NOT NULL,
+    title TEXT NOT NULL,
+    subtitle TEXT,
+    body_text TEXT,
+    button_label TEXT,
+    button_link TEXT,
+    background_image_url TEXT,
+    display_order INT DEFAULT 0,
+    is_visible BOOLEAN DEFAULT TRUE,
+    custom_config JSONB DEFAULT '{}',
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.media_library (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    file_url TEXT NOT NULL,
+    file_name TEXT NOT NULL,
+    alt_text TEXT,
+    category VARCHAR(50) DEFAULT 'catalogue',
+    file_size_bytes BIGINT,
+    mime_type VARCHAR(50),
+    is_archived BOOLEAN DEFAULT FALSE,
+    uploaded_by UUID REFERENCES public.profiles(id),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS public.activity_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    actor_profile_id UUID REFERENCES public.profiles(id),
+    action_type VARCHAR(50) NOT NULL,
+    entity_name VARCHAR(50) NOT NULL,
+    entity_id UUID,
+    details JSONB,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 10. ENABLE ROW LEVEL SECURITY ON ALL TABLES
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.staff_roles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.collections ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.collection_translations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.product_images ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.product_translations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.custom_designs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.conversations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.messages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.message_attachments ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.quotations ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.quotation_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.orders ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.order_status_history ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.authenticity_records ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.authenticity_verifications ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.homepage_sections ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.media_library ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.activity_logs ENABLE ROW LEVEL SECURITY;
+
+-- 11. SECURITY DEFINER HELPER FUNCTION FOR ROLE CHECKS
+CREATE OR REPLACE FUNCTION public.is_active_staff(required_role public.app_role DEFAULT NULL)
+RETURNS BOOLEAN AS $$
+BEGIN
+    IF required_role IS NULL THEN
+        RETURN EXISTS (
+            SELECT 1 FROM public.staff_roles
+            WHERE profile_id = auth.uid() AND active = TRUE
+        );
+    ELSE
+        RETURN EXISTS (
+            SELECT 1 FROM public.staff_roles
+            WHERE profile_id = auth.uid() AND active = TRUE
+              AND (role = required_role OR role = 'owner' OR role = 'super_admin')
+        );
+    END IF;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- 12. RLS POLICIES
+
+-- Public Read Policies
+DROP POLICY IF EXISTS "Public users view published products" ON public.products;
+CREATE POLICY "Public users view published products" 
+ON public.products FOR SELECT 
+USING (is_published = TRUE AND is_archived = FALSE);
+
+DROP POLICY IF EXISTS "Public users view product images" ON public.product_images;
+CREATE POLICY "Public users view product images" 
+ON public.product_images FOR SELECT 
+USING (EXISTS (SELECT 1 FROM public.products p WHERE p.id = product_id AND p.is_published = TRUE));
+
+DROP POLICY IF EXISTS "Public users view published collections" ON public.collections;
+CREATE POLICY "Public users view published collections" 
+ON public.collections FOR SELECT 
+USING (is_published = TRUE);
+
+DROP POLICY IF EXISTS "Public users view published homepage sections" ON public.homepage_sections;
+CREATE POLICY "Public users view published homepage sections" 
+ON public.homepage_sections FOR SELECT 
+USING (is_visible = TRUE);
+
+-- Customer Isolation Policies (Zero Leakage: Customer A never sees Customer B)
+DROP POLICY IF EXISTS "Customers view only their own profile" ON public.profiles;
+CREATE POLICY "Customers view only their own profile" 
+ON public.profiles FOR SELECT 
+USING (id = auth.uid() OR public.is_active_staff());
+
+DROP POLICY IF EXISTS "Customers update only their own profile" ON public.profiles;
+CREATE POLICY "Customers update only their own profile" 
+ON public.profiles FOR UPDATE 
+USING (id = auth.uid());
+
+DROP POLICY IF EXISTS "Customers view only their own conversations" ON public.conversations;
+CREATE POLICY "Customers view only their own conversations" 
+ON public.conversations FOR SELECT 
+USING (customer_profile_id = auth.uid() OR public.is_active_staff());
+
+DROP POLICY IF EXISTS "Customers view only their own messages" ON public.messages;
+CREATE POLICY "Customers view only their own messages" 
+ON public.messages FOR SELECT 
+USING (
+    EXISTS (
+        SELECT 1 FROM public.conversations c 
+        WHERE c.id = conversation_id 
+          AND (c.customer_profile_id = auth.uid() OR public.is_active_staff())
+    )
+);
+
+DROP POLICY IF EXISTS "Customers insert messages in their conversation" ON public.messages;
+CREATE POLICY "Customers insert messages in their conversation" 
+ON public.messages FOR INSERT 
+WITH CHECK (
+    EXISTS (
+        SELECT 1 FROM public.conversations c 
+        WHERE c.id = conversation_id 
+          AND (c.customer_profile_id = auth.uid() OR public.is_active_staff())
+    )
+);
+
+DROP POLICY IF EXISTS "Customers view only their own quotations" ON public.quotations;
+CREATE POLICY "Customers view only their own quotations" 
+ON public.quotations FOR SELECT 
+USING (customer_profile_id = auth.uid() OR public.is_active_staff());
+
+DROP POLICY IF EXISTS "Customers view only their own orders" ON public.orders;
+CREATE POLICY "Customers view only their own orders" 
+ON public.orders FOR SELECT 
+USING (customer_profile_id = auth.uid() OR public.is_active_staff());
+
+-- Staff Management Full Access Policies
+DROP POLICY IF EXISTS "Staff manage products" ON public.products;
+CREATE POLICY "Staff manage products" 
+ON public.products FOR ALL 
+USING (public.is_active_staff('product_manager'));
+
+DROP POLICY IF EXISTS "Staff manage collections" ON public.collections;
+CREATE POLICY "Staff manage collections" 
+ON public.collections FOR ALL 
+USING (public.is_active_staff('product_manager'));
+
+DROP POLICY IF EXISTS "Staff manage homepage" ON public.homepage_sections;
+CREATE POLICY "Staff manage homepage" 
+ON public.homepage_sections FOR ALL 
+USING (public.is_active_staff('content_manager'));
+
+DROP POLICY IF EXISTS "Staff manage quotations" ON public.quotations;
+CREATE POLICY "Staff manage quotations" 
+ON public.quotations FOR ALL 
+USING (public.is_active_staff('wholesale_manager'));
+
+DROP POLICY IF EXISTS "Staff manage orders" ON public.orders;
+CREATE POLICY "Staff manage orders" 
+ON public.orders FOR ALL 
+USING (public.is_active_staff('wholesale_manager'));
+
+DROP POLICY IF EXISTS "Staff view all conversations" ON public.conversations;
+CREATE POLICY "Staff view all conversations" 
+ON public.conversations FOR ALL 
+USING (public.is_active_staff('customer_support'));
+
+DROP POLICY IF EXISTS "Staff manage media" ON public.media_library;
+CREATE POLICY "Staff manage media" 
+ON public.media_library FOR ALL 
+USING (public.is_active_staff());
+
+DROP POLICY IF EXISTS "Owner manages staff roles" ON public.staff_roles;
+CREATE POLICY "Owner manages staff roles" 
+ON public.staff_roles FOR ALL 
+USING (public.is_active_staff('owner'));
+
+DROP POLICY IF EXISTS "Staff view activity logs" ON public.activity_logs;
+CREATE POLICY "Staff view activity logs" 
+ON public.activity_logs FOR SELECT 
+USING (public.is_active_staff('owner'));
+
+-- 13. SEED DEFAULT HOMEPAGE SECTIONS
+INSERT INTO public.homepage_sections (section_key, title, subtitle, body_text, button_label, button_link, display_order, is_visible)
+VALUES 
+(
+    'hero',
+    'Elegance In Every Step',
+    'POM''S INTERNATIONAL FOOTWEAR',
+    'Discover bespoke craftsmanship, modern luxury silhouettes, and international wholesale footwear engineered for global distinction.',
+    'EXPLORE COLLECTION',
+    '/catalogue',
+    1,
+    TRUE
+),
+(
+    'featured_lines',
+    'The Signature Edit',
+    'CURATED COLLECTIONS',
+    'Iconic pointed flats, sculpted evening heels, and artisanal slides handcrafted with premier leather and champagne gold accents.',
+    'VIEW ALL LINES',
+    '/collection',
+    2,
+    TRUE
+),
+(
+    'custom_design',
+    'Bring Your Footwear Vision to Life',
+    'BESPOKE SHOE STUDIO',
+    'Have a footwear silhouette or custom material in mind? Upload your photographs, select your preferences, and collaborate directly with our master artisans.',
+    'START CUSTOM DESIGN',
+    '/custom-design',
+    3,
+    TRUE
+),
+(
+    'wholesale_banner',
+    'International Wholesale & Bulk Export',
+    'GLOBAL B2B DISTRIBUTION',
+    'Supplying international boutiques, footwear retailers, and department stores worldwide with flexible carton packaging, MOQs, and reliable freight.',
+    'REQUEST WHOLESALE QUOTE',
+    '/wholesale',
+    4,
+    TRUE
+),
+(
+    'authenticity',
+    'Product Authenticity Verification',
+    'GENUINE CRAFTSMANSHIP GUARANTEE',
+    'Every pair of POM''S footwear features a unique serial identifier and QR code. Verify your official shoes directly against our master database.',
+    'VERIFY PRODUCT',
+    '/authenticity',
+    5,
+    TRUE
+)
+ON CONFLICT (section_key) DO NOTHING;
+
