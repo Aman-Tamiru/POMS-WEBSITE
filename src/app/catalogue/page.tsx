@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Search, ArrowRight } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
+import { useLanguage } from "@/components/LanguageProvider";
 
 interface ProductItem {
   id: string;
@@ -44,6 +45,8 @@ const formatShoeType = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1);
 
 export default function CataloguePage() {
+  const { t } = useLanguage();
+
   const [supabase] = useState(() => createClient());
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -71,7 +74,7 @@ export default function CataloguePage() {
 
       if (productError) {
         if (active) {
-          setLoadError("We could not load the catalogue. Please try again later.");
+          setLoadError("products");
           setLoading(false);
         }
         return;
@@ -98,7 +101,7 @@ export default function CataloguePage() {
       if (!active) return;
 
       if (imageError) {
-        setLoadError("Products loaded, but their photographs could not be retrieved.");
+        setLoadError("images");
         setLoading(false);
         return;
       }
@@ -151,7 +154,10 @@ export default function CataloguePage() {
   );
 
   const availabilityOptions = useMemo(
-    () => ["All", ...Array.from(new Set(products.map((item) => item.availability)))],
+    () => [
+      "All",
+      ...Array.from(new Set(products.map((item) => item.availability))),
+    ],
     [products]
   );
 
@@ -185,37 +191,52 @@ export default function CataloguePage() {
     setSelectedAvailability("All");
   };
 
+  const translateAvailability = (value: string) => {
+    if (value === "Wholesale Available") {
+      return t("cataloguePage.wholesaleAvailable");
+    }
+
+    if (value === "Contact for Details") {
+      return t("cataloguePage.contactForDetails");
+    }
+
+    return value;
+  };
+
   return (
     <div className="mx-auto max-w-7xl px-5 py-14 md:px-10 lg:py-20">
       <div className="border-b border-[var(--border)] pb-8">
         <p className="font-serif text-xs uppercase tracking-[0.35em] text-[var(--gold)]">
-          Complete Directory
+          {t("cataloguePage.eyebrow")}
         </p>
+
         <h1 className="mt-3 font-serif text-4xl text-[var(--foreground)] sm:text-5xl">
-          Footwear Catalogue
+          {t("cataloguePage.title")}
         </h1>
+
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--foreground-muted)]">
-          Explore individual luxury pairs and carton-tier wholesale collections.
-          Filter by shoe type, material, or export availability.
+          {t("cataloguePage.description")}
         </p>
       </div>
 
       <div className="mt-8 flex flex-col items-center justify-between gap-4 border border-[var(--border)] bg-[var(--surface)] p-4 md:flex-row">
         <div className="relative w-full md:w-80">
           <Search className="absolute left-3.5 top-3 h-4 w-4 text-[var(--foreground-muted)]" />
+
           <input
             type="text"
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
-            placeholder="Search by name, material, color..."
+            placeholder={t("cataloguePage.search")}
             className="w-full border border-[var(--border)] bg-[var(--background)] py-2 pl-10 pr-4 text-xs text-[var(--foreground)] outline-none focus:border-[var(--gold)]"
           />
         </div>
 
         <div className="flex w-full flex-wrap items-center gap-2 md:w-auto">
           <span className="mr-1 text-xs uppercase tracking-wider text-[var(--foreground-muted)]">
-            Type:
+            {t("cataloguePage.type")}
           </span>
+
           {shoeTypes.map((type) => (
             <button
               key={type}
@@ -226,7 +247,7 @@ export default function CataloguePage() {
                   : "border-[var(--border)] text-[var(--foreground)] hover:border-[var(--gold)]"
               }`}
             >
-              {type}
+              {type === "All" ? t("cataloguePage.all") : type}
             </button>
           ))}
         </div>
@@ -234,8 +255,9 @@ export default function CataloguePage() {
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <span className="text-xs uppercase tracking-wider text-[var(--foreground-muted)]">
-          Availability:
+          {t("cataloguePage.availability")}
         </span>
+
         {availabilityOptions.map((availability) => (
           <button
             key={availability}
@@ -246,7 +268,9 @@ export default function CataloguePage() {
                 : "border-[var(--border)] text-[var(--foreground)] hover:border-[var(--gold)]"
             }`}
           >
-            {availability}
+            {availability === "All"
+              ? t("cataloguePage.all")
+              : translateAvailability(availability)}
           </button>
         ))}
       </div>
@@ -254,14 +278,18 @@ export default function CataloguePage() {
       {loading && (
         <div className="mt-16 border border-[var(--border)] bg-[var(--surface)] py-16 text-center">
           <p className="text-sm text-[var(--foreground-muted)]">
-            Loading footwear catalogue...
+            {t("cataloguePage.loading")}
           </p>
         </div>
       )}
 
       {!loading && loadError && (
         <div className="mt-16 border border-[var(--border)] bg-[var(--surface)] py-16 text-center">
-          <p className="text-sm text-[var(--foreground-muted)]">{loadError}</p>
+          <p className="text-sm text-[var(--foreground-muted)]">
+            {loadError === "products"
+              ? t("cataloguePage.loadError")
+              : t("cataloguePage.imageError")}
+          </p>
         </div>
       )}
 
@@ -276,8 +304,9 @@ export default function CataloguePage() {
                 <div>
                   <div className="flex items-center justify-between text-[11px] uppercase tracking-widest text-[var(--gold)]">
                     <span>{item.shoeType}</span>
+
                     <span className="border border-[var(--gold)]/30 px-2 py-0.5">
-                      {item.availability}
+                      {translateAvailability(item.availability)}
                     </span>
                   </div>
 
@@ -291,7 +320,7 @@ export default function CataloguePage() {
                       />
                     ) : (
                       <span className="font-serif text-center text-xs italic text-[var(--foreground-muted)]">
-                        {item.name} Photography
+                        {item.name} {t("cataloguePage.photography")}
                       </span>
                     )}
                   </div>
@@ -303,41 +332,45 @@ export default function CataloguePage() {
                   <div className="mt-3 space-y-1 text-xs text-[var(--foreground-muted)]">
                     <p>
                       <strong className="font-normal text-[var(--foreground)]">
-                        Material:
+                        {t("cataloguePage.material")}
                       </strong>{" "}
                       {item.materials.length
                         ? item.materials.join(", ")
-                        : "Contact for details"}
+                        : t("cataloguePage.contactForDetailsShort")}
                     </p>
+
                     <p>
                       <strong className="font-normal text-[var(--foreground)]">
-                        Colorway:
+                        {t("cataloguePage.colorway")}
                       </strong>{" "}
                       {item.colors.length
                         ? item.colors.join(", ")
-                        : "Contact for details"}
+                        : t("cataloguePage.contactForDetailsShort")}
                     </p>
+
                     <p>
                       <strong className="font-normal text-[var(--foreground)]">
-                        Package Spec:
+                        {t("cataloguePage.packageSpec")}
                       </strong>{" "}
                       {item.packageQty > 0
-                        ? `${item.packageQty} pairs/carton`
-                        : "Contact for details"}{" "}
-                      · MOQ: {item.moq}
+                        ? `${item.packageQty} ${t("cataloguePage.pairsPerCarton")}`
+                        : t("cataloguePage.contactForDetailsShort")}{" "}
+                      · {t("cataloguePage.moq")} {item.moq}
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-6 flex items-center justify-between border-t border-[var(--border)]/40 pt-4">
                   <span className="text-xs font-medium text-[var(--gold)]">
-                    Price on Request
+                    {t("cataloguePage.priceOnRequest")}
                   </span>
+
                   <Link
                     href="/custom-design"
-                    className="btn-gold-outline inline-flex items-center gap-1 text-[0.65rem] px-3.5 py-2"
+                    className="btn-gold-outline inline-flex items-center gap-1 px-3.5 py-2 text-[0.65rem]"
                   >
-                    Request Quotation <ArrowRight className="h-3 w-3" />
+                    {t("cataloguePage.requestQuotation")}
+                    <ArrowRight className="h-3 w-3" />
                   </Link>
                 </div>
               </article>
@@ -348,15 +381,16 @@ export default function CataloguePage() {
             <div className="mt-16 border border-[var(--border)] bg-[var(--surface)] py-16 text-center">
               <p className="font-serif text-lg text-[var(--foreground-muted)]">
                 {products.length === 0
-                  ? "Our footwear catalogue is being prepared. Please check back soon."
-                  : "No footwear models matched your selected criteria."}
+                  ? t("cataloguePage.emptyDescription")
+                  : t("cataloguePage.noResults")}
               </p>
+
               {products.length > 0 && (
                 <button
                   onClick={resetFilters}
                   className="btn-gold-outline mt-4 text-xs"
                 >
-                  Reset Filters
+                  {t("cataloguePage.resetFilters")}
                 </button>
               )}
             </div>

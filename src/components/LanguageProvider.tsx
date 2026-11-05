@@ -29,12 +29,15 @@ const dictionaries: Record<SupportedLanguage, Dictionary> = {
   es,
 };
 
-export const LANGUAGE_LABELS: Record<SupportedLanguage, { label: string; code: string; flag: string }> = {
-  en: { label: "English", code: "EN", flag: "🇬🇧" },
-  am: { label: "አማርኛ", code: "AM", flag: "🇪🇹" },
+export const LANGUAGE_LABELS: Record<
+  SupportedLanguage,
+  { label: string; code: string; flag: string }
+> = {
+  en: { label: "English", code: "GB", flag: "🇬🇧" },
+  am: { label: "አማርኛ", code: "ET", flag: "🇪🇹" },
   so: { label: "Soomaali", code: "SO", flag: "🇸🇴" },
-  "zh-CN": { label: "中文", code: "ZH", flag: "🇨🇳" },
-  hi: { label: "हिन्दी", code: "HI", flag: "🇮🇳" },
+  "zh-CN": { label: "中文", code: "CN", flag: "🇨🇳" },
+  hi: { label: "हिन्दी", code: "IN", flag: "🇮🇳" },
   es: { label: "Español", code: "ES", flag: "🇪🇸" },
 };
 

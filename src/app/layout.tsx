@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Cinzel, Playfair_Display, Cormorant_Garamond, Inter } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -31,18 +31,33 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" }
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }
+    ]
+  },
   title: {
     default: "POM'S | Luxury International Footwear & Wholesale",
     template: "%s | POM'S Footwear",
   },
-  description:
-    "POM'S International Footwear — Luxury women's shoes, bespoke made-to-order footwear design, and international wholesale export. Handcrafted excellence.",
+  description: "POM'S International Footwear — Luxury women's shoes, bespoke made-to-order footwear design, and international wholesale export. Handcrafted excellence.",
   openGraph: {
     title: "POM'S | Luxury International Footwear",
     description: "Bespoke handcrafted women's shoes and international wholesale collections.",
     type: "website",
     siteName: "POM'S Footwear",
   },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#111111"
 };
 
 export default function RootLayout({
