@@ -31,42 +31,42 @@ export default function CollectionPageClient({
   const { t } = useLanguage();
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <section className="mx-auto max-w-7xl px-6 py-20">
         <div className="mb-16 text-center">
-          <p className="mb-4 text-xs uppercase tracking-[0.3em] text-neutral-500">
+          <p className="mb-4 text-xs uppercase tracking-[0.3em] text-[var(--gold)]">
             {t("collectionPage.eyebrow")}
           </p>
 
-          <h1 className="mb-6 text-4xl font-light tracking-wide text-neutral-900 md:text-6xl">
+          <h1 className="mb-6 text-4xl font-light tracking-wide text-[var(--foreground)] md:text-6xl">
             {t("collectionPage.title")}
           </h1>
 
-          <p className="mx-auto max-w-2xl text-sm leading-7 text-neutral-600 md:text-base">
+          <p className="mx-auto max-w-2xl text-sm leading-7 text-[var(--foreground-muted)] md:text-base">
             {t("collectionPage.description")}
           </p>
         </div>
 
         {collectionError ? (
-          <div className="py-20 text-center">
-            <h2 className="mb-3 text-xl font-medium text-neutral-900">
+          <div className="border border-[var(--border)] bg-[var(--surface)] py-20 text-center">
+            <h2 className="mb-3 text-xl font-medium text-[var(--foreground)]">
               {t("collectionPage.unavailable")}
             </h2>
-            <p className="text-sm text-neutral-500">
+            <p className="text-sm text-[var(--foreground-muted)]">
               {t("collectionPage.tryAgain")}
             </p>
           </div>
         ) : collections.length === 0 ? (
-          <div className="py-20 text-center">
-            <h2 className="mb-3 text-xl font-medium text-neutral-900">
+          <div className="border border-[var(--border)] bg-[var(--surface)] py-20 text-center">
+            <h2 className="mb-3 text-xl font-medium text-[var(--foreground)]">
               {t("collectionPage.emptyTitle")}
             </h2>
-            <p className="mb-8 text-sm text-neutral-500">
+            <p className="mb-8 text-sm text-[var(--foreground-muted)]">
               {t("collectionPage.emptyDescription")}
             </p>
             <Link
               href="/catalogue"
-              className="inline-flex items-center gap-2 border border-neutral-900 px-7 py-3 text-xs uppercase tracking-widest text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
+              className="btn-gold-outline inline-flex items-center gap-2 px-7 py-3 text-xs uppercase tracking-widest"
             >
               {t("collectionPage.exploreCatalogue")}
               <ArrowRight size={15} />
@@ -83,28 +83,28 @@ export default function CollectionPageClient({
                     href={`/collection/${col.slug}`}
                     className="block"
                   >
-                    <div className="relative mb-6 aspect-[4/5] overflow-hidden bg-neutral-100">
+                    <div className="relative mb-6 aspect-[4/5] overflow-hidden border border-[var(--border)] bg-[var(--background-secondary)]">
                       {col.cover_image_url ? (
                         <Image
-                        src={col.cover_image_url}
-                        alt={`${col.name} ${t("collectionPage.collectionAlt")}`}
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        className="object-cover transition duration-700 group-hover:scale-105"
-                      />
+                          src={col.cover_image_url}
+                          alt={`${col.name} ${t("collectionPage.collectionAlt")}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover transition duration-700 group-hover:scale-105"
+                        />
                       ) : (
-                        <div className="flex h-full items-center justify-center text-xs uppercase tracking-widest text-neutral-400">
+                        <div className="flex h-full items-center justify-center text-xs uppercase tracking-widest text-[var(--foreground-muted)]">
                           {t("collectionPage.coverAlt")}
                         </div>
                       )}
                     </div>
 
                     <div className="mb-3 flex items-center justify-between">
-                      <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-500">
+                      <span className="text-[10px] uppercase tracking-[0.25em] text-[var(--gold)]">
                         {t("collectionPage.publishedCollection")}
                       </span>
 
-                      <span className="text-[10px] uppercase tracking-widest text-neutral-500">
+                      <span className="text-[10px] uppercase tracking-widest text-[var(--foreground-muted)]">
                         {productCountError
                           ? t("collectionPage.models")
                           : `${count} ${
@@ -115,16 +115,16 @@ export default function CollectionPageClient({
                       </span>
                     </div>
 
-                    <h2 className="mb-3 text-2xl font-light tracking-wide text-neutral-900">
+                    <h2 className="mb-3 text-2xl font-light tracking-wide text-[var(--foreground)] transition group-hover:text-[var(--gold)]">
                       {col.name}
                     </h2>
 
-                    <p className="mb-6 text-sm leading-7 text-neutral-600">
+                    <p className="mb-6 text-sm leading-7 text-[var(--foreground-muted)]">
                       {col.description ||
                         t("collectionPage.collectionFallback")}
                     </p>
 
-                    <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-neutral-900">
+                    <span className="inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[var(--gold)]">
                       {t("collectionPage.browseModels")}
                       <ArrowRight
                         size={14}

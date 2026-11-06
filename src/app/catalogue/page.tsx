@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Search, ArrowRight } from "lucide-react";
+import { Search, ArrowRight, X, ExternalLink } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { useLanguage } from "@/components/LanguageProvider";
 
@@ -54,6 +54,11 @@ export default function CataloguePage() {
   const [selectedAvailability, setSelectedAvailability] = useState("All");
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
+  const [selectedImage, setSelectedImage] = useState<{
+    id: string;
+    url: string;
+    alt: string;
+  } | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -310,21 +315,75 @@ export default function CataloguePage() {
                     </span>
                   </div>
 
-                  <div className="my-6 flex h-48 items-center justify-center overflow-hidden border border-[var(--border)]/40 bg-[var(--background-secondary)] p-2">
-                    {item.imageUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={item.imageUrl}
-                        alt={item.imageAlt}
-                        className="h-full w-full object-contain"
-                      />
-                    ) : (
-                      <span className="font-serif text-center text-xs italic text-[var(--foreground-muted)]">
-                        {item.name} {t("cataloguePage.photography")}
-                      </span>
-                    )}
-                  </div>
+                  <div className="my-6">
+  {item.imageUrl ? (
+    <button
+      type="button"
+      onClick={() =>
+        setSelectedImage({
+          id: item.id,
+          url: item.imageUrl!,
+          alt: item.imageAlt,
+        })
+      }
+      aria-label={`Enlarge image of ${item.name}`}
+      className="flex h-48 w-full cursor-zoom-in items-center justify-center overflow-hidden border border-[var(--border)]/40 bg-[var(--background-secondary)] p-2 transition hover:border-[var(--gold)]"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={item.imageUrl}
+        alt={item.imageAlt}
+        className="h-full w-full object-contain transition duration-300 hover:scale-105"
+      />
+    </button>
+  ) : (
+    <div className="flex h-48 items-center justify-center border border-[var(--border)]/40 bg-[var(--background-secondary)] p-2">
+      <span className="text-center font-serif text-xs italic text-[var(--foreground-muted)]">
+        {item.name} {t("cataloguePage.photography")}
+      </span>
+    </div>
+  )}
+</div>
+{selectedImage?.id === item.id && (
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-label="Enlarged product image"
+    onClick={() => setSelectedImage(null)}
+    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-5"
+  >
+    <button
+      type="button"
+      onClick={() => setSelectedImage(null)}
+      aria-label="Close enlarged image"
+      className="absolute right-5 top-5 rounded-full border border-white/30 p-3 text-white hover:bg-white/20"
+    >
+      <X className="h-6 w-6" />
+    </button>
 
+    <div
+      onClick={(event) => event.stopPropagation()}
+      className="flex max-h-[90vh] max-w-5xl flex-col items-center gap-5"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={selectedImage.url}
+        alt={selectedImage.alt}
+        className="max-h-[75vh] max-w-full object-contain"
+      />
+
+      <a
+        href={selectedImage.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-2 text-sm text-white underline hover:text-[var(--gold)]"
+      >
+        Open Original Image
+        <ExternalLink className="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+)}
                   <h2 className="font-serif text-xl font-medium text-[var(--foreground)] transition group-hover:text-[var(--gold)]">
                     {item.name}
                   </h2>

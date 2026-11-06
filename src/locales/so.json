@@ -9,7 +9,14 @@
     "about": "Nagu Saabsan",
     "contact": "Nala Soo Xiriir",
     "adminPortal": "Bogga Maamulka",
-    "sizeGuide": "Hagaha Cabbirka"
+    "sizeGuide": "Hagaha Cabbirka",
+    "primaryNavigation": "Hagidda Weyn",
+    "mobileNavigation": "Hagidda Moobilka",
+    "changeLanguage": "Beddel Luqadda",
+    "switchToLightTheme": "U beddel muuqaalka iftiinka",
+    "switchToDarkTheme": "U beddel muuqaalka madow",
+    "openMenu": "Fur liiska",
+    "closeMenu": "Xir liiska"
   },
   "hero": {
     "eyebrow": "POM'S KABAHA DUMARKA EE CAALAMIGA AH",
@@ -56,7 +63,19 @@
   "footer": {
     "brandTagline": "Xarrago tallaabo kasta, Kalsooni dabeecad kasta.",
     "copyright": "© 2026 POM'S International Footwear. Dhammaan xuquuqda way dhowran tahay.",
-    "adminLink": "Bogga Maamulka"
+    "adminLink": "Bogga Maamulka",
+    "manufacturing": "Soo saarista kabaha iyo dhoofinta jumlada",
+    "location": "Addis Ababa, Itoobiya — Qaybin caalami ah",
+    "assistanceFit": "Caawimaad iyo cabbirka kabaha",
+    "shippingCustoms": "Rarista iyo kastamka",
+    "faq": "Su'aalaha inta badan la isweydiiyo",
+    "globalCommunications": "Xiriirka caalamiga ah",
+    "wholesaleInquiries": "Dalabka jumlada iyo weydiimaha:",
+    "whatsappExport": "Adeegga WhatsApp iyo dhoofinta waa la heli karaa",
+    "startCustomOrder": "Bilow dalab gaar ah",
+    "privacyPolicy": "Siyaasadda asturnaanta",
+    "termsConditions": "Shuruudaha iyo xaaladaha",
+    "restrictedStaffTitle": "Nidaamka shaqaalaha ee xaddidan"
   },
   "cataloguePage": {
     "eyebrow": "Liiska Buuxa",

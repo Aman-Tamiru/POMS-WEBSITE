@@ -18,8 +18,8 @@ export function Footer() {
               {t("footer.brandTagline")}
             </p>
             <div className="pt-2 text-xs text-[var(--foreground-muted)] space-y-1">
-              <p>Footwear Manufacturing &amp; Wholesale Export</p>
-              <p>Addis Ababa, Ethiopia · Global Distribution</p>
+              <p>{t("footer.manufacturing")}</p>
+              <p>{t("footer.location")}</p>
             </div>
           </div>
 
@@ -60,7 +60,7 @@ export function Footer() {
           {/* Customer Service & Sizing */}
           <div className="space-y-3">
             <p className="font-serif text-xs uppercase tracking-[0.25em] text-[var(--gold)]">
-              Assistance &amp; Fit
+              {t("footer.assistanceFit")}
             </p>
             <ul className="space-y-2 text-sm text-[var(--foreground-muted)]">
               <li>
@@ -70,7 +70,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/shipping" className="hover:text-[var(--gold)] transition">
-                  Shipping &amp; Customs
+                  {t("footer.shippingCustoms")}
                 </Link>
               </li>
               <li>
@@ -85,7 +85,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/faq" className="hover:text-[var(--gold)] transition">
-                  FAQ
+                  {t("footer.faq")}
                 </Link>
               </li>
             </ul>
@@ -94,18 +94,18 @@ export function Footer() {
           {/* Contact Details */}
           <div className="space-y-3">
             <p className="font-serif text-xs uppercase tracking-[0.25em] text-[var(--gold)]">
-              Global Communications
+              {t("footer.globalCommunications")}
             </p>
             <div className="space-y-2 text-sm text-[var(--foreground-muted)]">
-              <p>Direct Wholesale &amp; Inquiries:</p>
+              <p>{t("footer.wholesaleInquiries")}</p>
               <p className="font-medium text-[var(--gold)]">+251 920 237 030</p>
-              <p>WhatsApp &amp; Export Desk Available</p>
+              <p>{t("footer.whatsappExport")}</p>
               <div className="pt-2">
                 <Link
                   href="/custom-design"
                   className="btn-gold-outline text-[0.65rem] py-2 px-4 inline-flex"
                 >
-                  Start Custom Order
+                  {t("footer.startCustomOrder")}
                 </Link>
               </div>
             </div>
@@ -118,16 +118,16 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="hover:text-[var(--gold)] transition">
-              Privacy Policy
+              {t("footer.privacyPolicy")}
             </Link>
             <Link href="/terms" className="hover:text-[var(--gold)] transition">
-              Terms &amp; Conditions
+              {t("footer.termsConditions")}
             </Link>
             {/* Discreet Admin Portal link */}
             <Link
               href="/admin"
               className="text-[var(--gold)]/60 hover:text-[var(--gold)] transition"
-              title="Restricted Staff Operating System"
+              title={t("footer.restrictedStaffTitle")}
             >
               {t("footer.adminLink")}
             </Link>

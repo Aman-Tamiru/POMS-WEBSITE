@@ -9,7 +9,14 @@
     "about": "हमारे बारे में",
     "contact": "संपर्क करें",
     "adminPortal": "एडमिन पोर्टल",
-    "sizeGuide": "साइज़ गाइड"
+    "sizeGuide": "साइज़ गाइड",
+    "primaryNavigation": "मुख्य नेविगेशन",
+    "mobileNavigation": "मोबाइल नेविगेशन",
+    "changeLanguage": "भाषा बदलें",
+    "switchToLightTheme": "लाइट थीम पर स्विच करें",
+    "switchToDarkTheme": "डार्क थीम पर स्विच करें",
+    "openMenu": "मेनू खोलें",
+    "closeMenu": "मेनू बंद करें"
   },
   "hero": {
     "eyebrow": "POM'S इंटरनेशनल फुटवियर",
@@ -56,7 +63,19 @@
   "footer": {
     "brandTagline": "हर कदम में लालित्य, आपके हर रूप में आत्मविश्वास।",
     "copyright": "© 2026 POM'S इंटरनेशनल फुटवियर। सर्वाधिकार सुरक्षित।",
-    "adminLink": "एडमिन पोर्टल"
+    "adminLink": "एडमिन पोर्टल",
+    "manufacturing": "जूता निर्माण और थोक निर्यात",
+    "location": "अदीस अबाबा, इथियोपिया — वैश्विक वितरण",
+    "assistanceFit": "सहायता और फिटिंग",
+    "shippingCustoms": "शिपिंग और सीमा शुल्क",
+    "faq": "अक्सर पूछे जाने वाले प्रश्न",
+    "globalCommunications": "वैश्विक संपर्क",
+    "wholesaleInquiries": "थोक पूछताछ और बिक्री:",
+    "whatsappExport": "WhatsApp और निर्यात सहायता उपलब्ध",
+    "startCustomOrder": "कस्टम ऑर्डर शुरू करें",
+    "privacyPolicy": "गोपनीयता नीति",
+    "termsConditions": "नियम और शर्तें",
+    "restrictedStaffTitle": "केवल कर्मचारियों के लिए प्रतिबंधित प्रणाली"
   },
   "cataloguePage": {
     "eyebrow": "संपूर्ण उत्पाद सूची",

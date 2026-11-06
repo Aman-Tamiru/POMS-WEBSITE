@@ -12,6 +12,8 @@ import {
   Package,
   Compass,
   CheckCircle2,
+  X,
+  ExternalLink,
 } from "lucide-react";
 
 interface FeaturedProduct {
@@ -44,6 +46,11 @@ export default function HomePage() {
   const { t } = useLanguage();
 
   const [supabase] = useState(() => createClient());
+  const [selectedImage, setSelectedImage] = useState<{
+    id: string;
+    url: string;
+    alt: string;
+  } | null>(null);
 
   const [featuredProducts, setFeaturedProducts] = useState<
     FeaturedProductCard[]
@@ -256,21 +263,76 @@ export default function HomePage() {
                     </span>
                   </div>
 
-                  <div className="my-8 flex h-44 items-center justify-center overflow-hidden border border-[var(--border)]/30 bg-[var(--background-secondary)] p-2">
-                    {item.imageUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={item.imageUrl}
-                        alt={item.imageAlt}
-                        className="h-full w-full object-contain"
-                      />
-                    ) : (
-                      <span className="font-serif text-sm italic text-center text-[var(--foreground-muted)]">
-                        POM&apos;S Craftsmanship Photography
-                      </span>
-                    )}
-                  </div>
+                  <div className="my-8">
+  {item.imageUrl ? (
+    <button
+      type="button"
+      onClick={() =>
+        setSelectedImage({
+          id: item.id,
+          url: item.imageUrl!,
+          alt: item.imageAlt,
+        })
+      }
+      aria-label={`Enlarge image of ${item.name}`}
+      className="flex h-44 w-full cursor-zoom-in items-center justify-center overflow-hidden border border-[var(--border)]/30 bg-[var(--background-secondary)] p-2 transition hover:border-[var(--gold)]"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={item.imageUrl}
+        alt={item.imageAlt}
+        className="h-full w-full object-contain transition duration-300 hover:scale-105"
+      />
+    </button>
+  ) : (
+    <div className="flex h-44 items-center justify-center border border-[var(--border)]/30 bg-[var(--background-secondary)] p-2">
+      <span className="text-center font-serif text-sm italic text-[var(--foreground-muted)]">
+        POM&apos;S Craftsmanship Photography
+      </span>
+    </div>
+  )}
+</div>
 
+{selectedImage?.id === item.id && (
+  <div
+    role="dialog"
+    aria-modal="true"
+    aria-label="Enlarged product image"
+    onClick={() => setSelectedImage(null)}
+    className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-5"
+  >
+    <button
+      type="button"
+      onClick={() => setSelectedImage(null)}
+      aria-label="Close enlarged image"
+      className="absolute right-5 top-5 rounded-full border border-white/30 p-3 text-white hover:bg-white/20"
+    >
+      <X className="h-6 w-6" />
+    </button>
+
+    <div
+      onClick={(event) => event.stopPropagation()}
+      className="flex max-h-[90vh] max-w-5xl flex-col items-center gap-5"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={selectedImage.url}
+        alt={selectedImage.alt}
+        className="max-h-[75vh] max-w-full object-contain"
+      />
+
+      <a
+        href={selectedImage.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-2 text-sm text-white underline hover:text-[var(--gold)]"
+      >
+        Open Original Image
+        <ExternalLink className="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+)}
                   <h3 className="font-serif text-xl font-medium text-[var(--foreground)] transition group-hover:text-[var(--gold)]">
                     {item.name}
                   </h3>
@@ -344,7 +406,11 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center border border-[var(--border)] bg-[var(--background-secondary)] p-10 text-center space-y-4">
+          <Link
+  href="/custom-design"
+  className="group flex flex-col items-center justify-center space-y-4 border border-[var(--border)] bg-[var(--background-secondary)] p-10 text-center transition hover:border-[var(--gold)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--gold)]"
+  aria-label="Open Direct Artisan Dialogue custom design page"
+>
             <Compass className="h-16 w-16 text-[var(--gold)]" />
 
             <h3 className="font-serif text-2xl text-[var(--foreground)]">
@@ -360,7 +426,7 @@ export default function HomePage() {
                 Photo Uploads · Swatches · Formal Quotes
               </span>
             </div>
-          </div>
+            </Link>
         </div>
       </section>
 

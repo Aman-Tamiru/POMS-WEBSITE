@@ -46,12 +46,12 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 md:px-10">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center" aria-label="POM'S Home">
+        <Link href="/" className="flex items-center" aria-label={t("nav.home")}>
           <Logo />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary Navigation">
+        <nav className="hidden items-center gap-7 lg:flex" aria-label={t("nav.primaryNavigation")}>
           {navLinks.map((item) => {
             const active = pathname === item.href;
             return (
@@ -78,7 +78,7 @@ export function Header() {
               type="button"
               onClick={() => setLangMenuOpen(!langMenuOpen)}
               className="flex items-center gap-1.5 rounded-sm border border-[var(--border)] px-2.5 py-1.5 text-xs text-[var(--foreground)] transition hover:border-[var(--gold)]"
-              aria-label="Change Language"
+              aria-label={t("nav.changeLanguage")}
             >
               <Globe className="h-3.5 w-3.5 text-[var(--gold)]" />
               <span className="font-medium">{LANGUAGE_LABELS[language].code}</span>
@@ -113,7 +113,7 @@ export function Header() {
             type="button"
             onClick={toggleTheme}
             className="flex h-8 w-8 items-center justify-center rounded-sm border border-[var(--border)] text-[var(--gold)] transition hover:border-[var(--gold)] hover:bg-[var(--surface-hover)]"
-            aria-label={theme === "dark" ? "Switch to Light Theme" : "Switch to Dark Theme"}
+            aria-label={theme === "dark" ? t("nav.switchToLightTheme") : t("nav.switchToDarkTheme")}
             title={theme === "dark" ? t("theme.light") : t("theme.dark")}
           >
             {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -124,7 +124,7 @@ export function Header() {
             type="button"
             onClick={() => setOpen(!open)}
             className="flex h-9 w-9 items-center justify-center text-[var(--gold)] lg:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
           >
             {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -134,7 +134,7 @@ export function Header() {
       {/* Mobile Navigation Drawer */}
       {open && (
         <div className="fixed inset-x-0 top-[65px] bottom-0 z-40 bg-[var(--background)]/98 backdrop-blur-xl lg:hidden overflow-y-auto px-6 py-8">
-          <nav className="flex flex-col gap-6" aria-label="Mobile Navigation">
+          <nav className="flex flex-col gap-6" aria-label={t("nav.mobileNavigation")}>
             {navLinks.map((item) => (
               <Link
                 key={item.href}

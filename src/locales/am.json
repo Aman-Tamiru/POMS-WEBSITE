@@ -9,7 +9,14 @@
     "about": "ስለ እኛ",
     "contact": "አግኙን",
     "adminPortal": "የአስተዳዳሪ ፖርታል",
-    "sizeGuide": "የመጠን መመሪያ"
+    "sizeGuide": "የመጠን መመሪያ",
+    "primaryNavigation": "ዋና ዳሰሳ",
+    "mobileNavigation": "የሞባይል ዳሰሳ",
+    "changeLanguage": "ቋንቋ ቀይር",
+    "switchToLightTheme": "ወደ ብሩህ ገጽታ ቀይር",
+    "switchToDarkTheme": "ወደ ጨለማ ገጽታ ቀይር",
+    "openMenu": "ምናሌውን ክፈት",
+    "closeMenu": "ምናሌውን ዝጋ"
   },
   "hero": {
     "eyebrow": "ፖምስ ዓለም አቀፍ የጫማ ብራንድ",
@@ -56,7 +63,19 @@
   "footer": {
     "brandTagline": "ውበት በሁሉም እርምጃ፣ በራስ መተማመን በሁሉም ማንነትዎ።",
     "copyright": "© 2026 ፖምስ ዓለም አቀፍ የጫማ ብራንድ። መብቱ በህግ የተጠበቀ ነው።",
-    "adminLink": "የአስተዳዳሪ ፖርታል"
+    "adminLink": "የአስተዳዳሪ ፖርታል",
+    "manufacturing": "የጫማ ማምረት እና የጅምላ ኤክስፖርት",
+    "location": "አዲስ አበባ፣ ኢትዮጵያ — ዓለም አቀፍ ስርጭት",
+    "assistanceFit": "እገዛ እና የጫማ መጠን",
+    "shippingCustoms": "ማጓጓዣ እና ጉምሩክ",
+    "faq": "ተደጋጋሚ ጥያቄዎች",
+    "globalCommunications": "ዓለም አቀፍ ግንኙነት",
+    "wholesaleInquiries": "የጅምላ ጥያቄዎች፦",
+    "whatsappExport": "የWhatsApp እና የኤክስፖርት አገልግሎት ይገኛል",
+    "startCustomOrder": "ልዩ ትዕዛዝ ይጀምሩ",
+    "privacyPolicy": "የግላዊነት ፖሊሲ",
+    "termsConditions": "ውሎች እና ሁኔታዎች",
+    "restrictedStaffTitle": "ለሠራተኞች ብቻ የተፈቀደ ስርዓት"
   },
   "cataloguePage": {
     "eyebrow": "ሙሉ የምርት ዝርዝር",

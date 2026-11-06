@@ -9,7 +9,14 @@
     "about": "Nosotros",
     "contact": "Contacto",
     "adminPortal": "Portal de Administración",
-    "sizeGuide": "Guía de Tallas"
+    "sizeGuide": "Guía de Tallas",
+    "primaryNavigation": "Navegación principal",
+    "mobileNavigation": "Navegación móvil",
+    "changeLanguage": "Cambiar idioma",
+    "switchToLightTheme": "Cambiar al tema claro",
+    "switchToDarkTheme": "Cambiar al tema oscuro",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "hero": {
     "eyebrow": "CALZADO INTERNACIONAL POM'S",
@@ -56,7 +63,19 @@
   "footer": {
     "brandTagline": "Elegancia en cada paso, Confianza en cada versión de usted.",
     "copyright": "© 2026 Calzado Internacional POM'S. Todos los derechos reservados.",
-    "adminLink": "Portal de Administración"
+    "adminLink": "Portal de Administración",
+    "manufacturing": "Fabricación de calzado y exportación al por mayor",
+    "location": "Adís Abeba, Etiopía — Distribución mundial",
+    "assistanceFit": "Asistencia y tallas",
+    "shippingCustoms": "Envíos y aduanas",
+    "faq": "Preguntas frecuentes",
+    "globalCommunications": "Comunicaciones internacionales",
+    "wholesaleInquiries": "Ventas al por mayor y consultas:",
+    "whatsappExport": "Servicio de WhatsApp y exportación disponible",
+    "startCustomOrder": "Iniciar pedido personalizado",
+    "privacyPolicy": "Política de privacidad",
+    "termsConditions": "Términos y condiciones",
+    "restrictedStaffTitle": "Sistema restringido para el personal"
   },
   "cataloguePage": {
     "eyebrow": "Directorio Completo",

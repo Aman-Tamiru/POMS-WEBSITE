@@ -9,7 +9,14 @@
     "about": "About",
     "contact": "Contact",
     "adminPortal": "Admin Portal",
-    "sizeGuide": "Size Guide"
+    "sizeGuide": "Size Guide",
+    "primaryNavigation": "Primary Navigation",
+    "mobileNavigation": "Mobile Navigation",
+    "changeLanguage": "Change Language",
+    "switchToLightTheme": "Switch to Light Theme",
+    "switchToDarkTheme": "Switch to Dark Theme",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "hero": {
     "eyebrow": "POM'S INTERNATIONAL FOOTWEAR",
@@ -56,7 +63,19 @@
   "footer": {
     "brandTagline": "Elegance in every step, Confidence in every you.",
     "copyright": "© 2026 POM'S International Footwear. All rights reserved.",
-    "adminLink": "Admin Portal"
+    "adminLink": "Admin Portal",
+    "manufacturing": "Footwear Manufacturing & Wholesale Export",
+    "location": "Addis Ababa, Ethiopia — Global Distribution",
+    "assistanceFit": "Assistance & Fit",
+    "shippingCustoms": "Shipping & Customs",
+    "faq": "FAQ",
+    "globalCommunications": "Global Communications",
+    "wholesaleInquiries": "Direct Wholesale & Inquiries:",
+    "whatsappExport": "WhatsApp & Export Desk Available",
+    "startCustomOrder": "Start Custom Order",
+    "privacyPolicy": "Privacy Policy",
+    "termsConditions": "Terms & Conditions",
+    "restrictedStaffTitle": "Restricted Staff Operating System"
   },
   "cataloguePage": {
     "eyebrow": "Complete Directory",
