@@ -85,7 +85,7 @@ export function Header() {
             </button>
 
             {langMenuOpen && (
-              <div className="absolute right-0 mt-2 w-36 rounded-sm border border-[var(--border)] bg-[var(--surface)] py-1 shadow-2xl z-50">
+              <div className="absolute right-0 mt-2 w-44 rounded-sm border border-[var(--border)] bg-[var(--surface)] py-1 shadow-2xl z-50">
                 {(Object.keys(LANGUAGE_LABELS) as SupportedLanguage[]).map((langKey) => (
                   <button
                     key={langKey}
@@ -131,42 +131,64 @@ export function Header() {
         </div>
       </div>
 
+            
       {/* Mobile Navigation Drawer */}
       {open && (
-        <div className="fixed inset-x-0 top-[65px] bottom-0 z-40 bg-[var(--background)]/98 backdrop-blur-xl lg:hidden overflow-y-auto px-6 py-8">
-          <nav className="flex flex-col gap-6" aria-label={t("nav.mobileNavigation")}>
+        <div className="fixed inset-x-0 top-[65px] bottom-0 z-40 overflow-y-auto overscroll-contain bg-[var(--background)] px-6 py-6 backdrop-blur-xl lg:hidden">
+          <nav
+            className="mx-auto flex max-w-xl flex-col gap-5 pb-10"
+            aria-label={t("nav.mobileNavigation")}
+          >
+            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[var(--gold)]">
+              POMS INTERNATIONAL
+            </p>
+
             {navLinks.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="font-serif text-xl tracking-[0.2em] text-[var(--foreground)] uppercase transition hover:text-[var(--gold)]"
+                onClick={() => setOpen(false)}
+                aria-current={pathname === item.href ? "page" : undefined}
+                className={`border-b border-[var(--border)] pb-4 font-serif text-lg tracking-widest uppercase transition-colors ${
+                  pathname === item.href
+                    ? "text-[var(--gold)]"
+                    : "text-[var(--foreground)] hover:text-[var(--gold)]"
+                }`}
               >
                 {item.label}
               </Link>
             ))}
-            <div className="my-4 h-px w-full bg-[var(--border)]" />
-            <Link
-              href="/size-guide"
-              className="text-sm tracking-widest uppercase text-[var(--foreground-muted)] hover:text-[var(--gold)]"
-            >
-              {t("nav.sizeGuide")}
-            </Link>
-            <Link
-              href="/about"
-              className="text-sm tracking-widest uppercase text-[var(--foreground-muted)] hover:text-[var(--gold)]"
-            >
-              {t("nav.about")}
-            </Link>
-            <Link
-              href="/contact"
-              className="text-sm tracking-widest uppercase text-[var(--foreground-muted)] hover:text-[var(--gold)]"
-            >
-              {t("nav.contact")}
-            </Link>
-            <div className="mt-6 pt-4 border-t border-[var(--border)]">
+
+            <div className="my-2 h-px w-full bg-[var(--border)]" />
+
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--gold)]">
+              Information & Support
+            </p>
+
+            {[
+              { href: "/about", label: "About Us" },
+              { href: "/contact", label: "Contact" },
+              { href: "/size-guide", label: "Size Guide" },
+              { href: "/shipping", label: "Shipping & Customs" },
+              { href: "/faq", label: "Frequently Asked Questions" },
+              { href: "/privacy", label: "Privacy Policy" },
+              { href: "/terms", label: "Terms & Conditions" },
+            ].map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="py-2 text-sm tracking-wider text-[var(--foreground-muted)] transition-colors hover:text-[var(--gold)]"
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            <div className="mt-3 border-t border-[var(--border)] pt-5">
               <Link
                 href="/admin"
-                className="text-xs uppercase tracking-widest text-[var(--gold)]/70 hover:text-[var(--gold)]"
+                onClick={() => setOpen(false)}
+                className="text-xs font-semibold uppercase tracking-widest text-[var(--gold)]"
               >
                 {t("nav.adminPortal")}
               </Link>
@@ -174,6 +196,7 @@ export function Header() {
           </nav>
         </div>
       )}
+
     </header>
   );
 }
