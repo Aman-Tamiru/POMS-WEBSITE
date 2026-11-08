@@ -75,7 +75,17 @@ const handleLogout = async () => {
     { id: "logs", label: "Audit & Activity Logs", icon: Activity, cat: "Security" },
     { id: "settings", label: "Website Settings", icon: Settings, cat: "Settings" },
   ];
-
+  const adminRoutes: Record<string, string> = {
+    homepage: "/admin/homepage",
+    products: "/admin/products",
+    collections: "/admin/collections",
+    media: "/admin/media",
+    designs: "/admin/inquiries",
+    messages: "/admin/messages",
+    quotations: "/admin/quotations",
+    orders: "/admin/orders",
+    settings: "/admin/settings",
+  };
   return (
     <div className="min-h-screen bg-[var(--background)] pb-24 text-[var(--foreground)]">
       {/* Mobile-Friendly Top Bar */}
@@ -178,28 +188,38 @@ const handleLogout = async () => {
           </div>
         </section>
 
-        {/* The 19 Administrative Sections Grid */}
-        <section className="space-y-3">
+               {/* The 19 Administrative Sections Grid */}
+               <section className="space-y-3">
           <div className="flex items-center justify-between border-b border-[var(--border)] pb-2">
             <p className="font-serif text-xs uppercase tracking-widest text-[var(--gold)]">
               Administrative Control Centers (19 Modules)
             </p>
-            <span className="text-[10px] text-[var(--foreground-muted)]">Full Android Access</span>
+            <span className="text-[10px] text-[var(--foreground-muted)]">
+              Full Android Access
+            </span>
           </div>
 
           <div className="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
             {adminSections.map((sec) => {
               const Icon = sec.icon;
+
               return (
                 <button
                   key={sec.id}
                   onClick={() => {
-                    if (sec.id === "products") {
-                      router.push("/admin/products");
+                    const route = adminRoutes[sec.id];
+
+                    if (route) {
+                      router.push(route);
                       return;
                     }
-                  
-                    alert(`Opening Module: ${sec.label}`);
+
+                    if (sec.id === "dashboard") {
+                      router.push("/admin");
+                      return;
+                    }
+
+                    alert(`${sec.label} is not connected yet.`);
                   }}
                   className="flex items-center justify-between border border-[var(--border)] bg-[var(--surface)] p-3.5 text-left transition hover:border-[var(--gold)] hover:bg-[var(--surface-hover)] active:scale-[0.99]"
                 >
@@ -207,11 +227,17 @@ const handleLogout = async () => {
                     <div className="flex h-8 w-8 items-center justify-center rounded-sm border border-[var(--border)] bg-[var(--background)] text-[var(--gold)]">
                       <Icon className="h-4 w-4" />
                     </div>
+
                     <div>
-                      <p className="text-xs font-semibold text-[var(--foreground)]">{sec.label}</p>
-                      <p className="text-[10px] text-[var(--foreground-muted)]">{sec.cat}</p>
+                      <p className="text-xs font-semibold text-[var(--foreground)]">
+                        {sec.label}
+                      </p>
+                      <p className="text-[10px] text-[var(--foreground-muted)]">
+                        {sec.cat}
+                      </p>
                     </div>
                   </div>
+
                   <span className="text-xs text-[var(--gold)]">→</span>
                 </button>
               );
@@ -225,17 +251,22 @@ const handleLogout = async () => {
             <h3 className="font-serif text-sm font-semibold text-[var(--foreground)]">
               Recent Administrative Activity
             </h3>
-            <span className="text-[10px] text-[var(--gold)]">Database Synced</span>
+            <span className="text-[10px] text-[var(--gold)]">
+              Database Synced
+            </span>
           </div>
+
           <div className="space-y-2 text-xs text-[var(--foreground-muted)] divide-y divide-[var(--border)]/40">
             <div className="pt-2 flex justify-between">
               <span>Owner Bootstrap Initialized</span>
               <span className="font-mono text-[10px]">Just now</span>
             </div>
+
             <div className="pt-2 flex justify-between">
               <span>Homepage Layout Verified (5 sections active)</span>
               <span className="font-mono text-[10px]">Today</span>
             </div>
+
             <div className="pt-2 flex justify-between">
               <span>Multilingual Dictionaries Loaded (EN, AM, ZH, HI, ES)</span>
               <span className="font-mono text-[10px]">Today</span>
