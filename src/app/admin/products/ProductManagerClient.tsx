@@ -288,9 +288,11 @@ export default function ProductManagerClient() {
             product_id: productId,
             image_url: publicUrl.publicUrl,
             alt_text: `${form.name.trim()} product photograph`,
-            is_primary: index === 0 && images.every(
-              (image) => image.product_id !== productId
-            ),
+            is_primary:
+  index === 0 &&
+  !images.some(
+    (image) => image.product_id === productId && image.is_primary
+  ),
             display_order: index,
           });
         }
