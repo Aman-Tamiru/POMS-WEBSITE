@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import "../styles/poms-design-system.css";
 import { Cinzel, Playfair_Display, Cormorant_Garamond, Inter } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
