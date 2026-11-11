@@ -75,17 +75,29 @@ const handleLogout = async () => {
     { id: "logs", label: "Audit & Activity Logs", icon: Activity, cat: "Security" },
     { id: "settings", label: "Website Settings", icon: Settings, cat: "Settings" },
   ];
-  const adminRoutes: Record<string, string> = {
-    homepage: "/admin/homepage",
-    products: "/admin/products",
-    collections: "/admin/collections",
-    media: "/admin/media",
-    designs: "/admin/inquiries",
-    messages: "/admin/messages",
-    quotations: "/admin/quotations",
-    orders: "/admin/orders",
-    settings: "/admin/settings",
-  };
+  
+const adminRoutes: Record<string, string> = {
+  dashboard: "/admin",
+  homepage: "/admin/homepage",
+  products: "/admin/products",
+  collections: "/admin/collections",
+  media: "/admin/media",
+  inquiries: "/admin/inquiries",
+  messages: "/admin/messages",
+  customers: "/admin/customers",
+  quotations: "/admin/quotations",
+  orders: "/admin/orders",
+  translations: "/admin/translations",
+  catalogue: "/admin/layout",
+  theme: "/admin/theme",
+  wholesale: "/admin/wholesale",
+  shipping: "/admin/shipping",
+  authenticity: "/admin/authenticity",
+  staff: "/admin/rbac",
+  logs: "/admin/logs",
+  settings: "/admin/settings",
+};
+
   return (
     <div className="min-h-screen bg-[var(--background)] pb-24 text-[var(--foreground)]">
       {/* Mobile-Friendly Top Bar */}
@@ -206,21 +218,15 @@ const handleLogout = async () => {
               return (
                 <button
                   key={sec.id}
-                  onClick={() => {
-                    const route = adminRoutes[sec.id];
+                  
+onClick={() => {
+  const destination = adminRoutes[sec.id];
 
-                    if (route) {
-                      router.push(route);
-                      return;
-                    }
+  if (destination) {
+    router.push(destination);
+  }
+}}
 
-                    if (sec.id === "dashboard") {
-                      router.push("/admin");
-                      return;
-                    }
-
-                    alert(`${sec.label} is not connected yet.`);
-                  }}
                   className="flex items-center justify-between border border-[var(--border)] bg-[var(--surface)] p-3.5 text-left transition hover:border-[var(--gold)] hover:bg-[var(--surface-hover)] active:scale-[0.99]"
                 >
                   <div className="flex items-center gap-3">
