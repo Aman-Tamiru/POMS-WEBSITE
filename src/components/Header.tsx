@@ -95,57 +95,68 @@ export function Header() {
         </Link>
 
         
-        {/* Premium Desktop Navigation */}
-        <nav
-          className="hidden items-center gap-7 lg:flex"
-          aria-label={t("nav.primaryNavigation")}
-        >
-          <Link
-            href="/"
-            className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
-              pathname === "/"
-                ? "font-bold text-[var(--gold)]"
-                : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
-            }`}
-          >
-            {t("nav.home")}
-          </Link>
+     {/* Premium Desktop Navigation */}
+<nav
+  className="hidden items-center gap-7 lg:flex"
+  aria-label={t("nav.primaryNavigation")}
+>
+  <Link
+    href="/"
+    className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+      pathname === "/"
+        ? "font-bold text-[var(--gold)]"
+        : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+    }`}
+  >
+    {t("nav.home")}
+  </Link>
 
-          <PomsMegaMenu />
+  <Link
+    href="/collection"
+    className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+      pathname === "/collection"
+        ? "font-bold text-[var(--gold)]"
+        : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+    }`}
+  >
+    {t("nav.collection")}
+  </Link>
 
-          <Link
-            href="/custom-design"
-            className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
-              pathname === "/custom-design"
-                ? "font-bold text-[var(--gold)]"
-                : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
-            }`}
-          >
-            {t("nav.customDesign")}
-          </Link>
+  <Link
+    href="/custom-design"
+    className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+      pathname === "/custom-design"
+        ? "font-bold text-[var(--gold)]"
+        : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+    }`}
+  >
+    {t("nav.customDesign")}
+  </Link>
 
-          <Link
-            href="/wholesale"
-            className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
-              pathname === "/wholesale"
-                ? "font-bold text-[var(--gold)]"
-                : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
-            }`}
-          >
-            {t("nav.wholesale")}
-          </Link>
+  <Link
+    href="/wholesale"
+    className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+      pathname === "/wholesale"
+        ? "font-bold text-[var(--gold)]"
+        : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+    }`}
+  >
+    {t("nav.wholesale")}
+  </Link>
 
-          <Link
-            href="/authenticity"
-            className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
-              pathname === "/authenticity"
-                ? "font-bold text-[var(--gold)]"
-                : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
-            }`}
-          >
-            {t("nav.authenticity")}
-          </Link>
-        </nav>
+  <Link
+    href="/authenticity"
+    className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+      pathname === "/authenticity"
+        ? "font-bold text-[var(--gold)]"
+        : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+    }`}
+  >
+    {t("nav.authenticity")}
+  </Link>
+
+  <PomsMegaMenu />
+</nav>
 
 
         {/* Header Controls */}

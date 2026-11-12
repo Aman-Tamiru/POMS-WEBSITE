@@ -10,7 +10,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import PomsSectionHeading from "@/components/brand/PomsSectionHeading";
 import PomsEditorialBand from "@/components/brand/PomsEditorialBand";
 import PomsReveal from "@/components/brand/PomsReveal";
-import PomsImageLightbox from "@/components/brand/PomsImageLightbox";
+import PomsProductGallery from "@/components/product/PomsProductGallery";
 import PomsCraftsmanshipStory from "@/components/home/sections/PomsCraftsmanshipStory";
 interface FeaturedProduct {
   id: string;
@@ -21,6 +21,7 @@ interface FeaturedProduct {
 }
 
 interface FeaturedProductImage {
+  id: string;
   product_id: string;
   image_url: string;
   alt_text: string | null;
@@ -36,6 +37,11 @@ interface FeaturedProductCard {
   description: string;
   imageUrl: string | null;
   imageAlt: string;
+  images: {
+    id: string;
+    image_url: string;
+    alt_text: string | null;
+  }[];
 }
 
 export default function HomePageExperience() {
@@ -87,12 +93,12 @@ export default function HomePageExperience() {
       const productIds = products.map((product) => product.id);
 
       const { data: imageData, error: imageError } = await supabase
-        .from("product_images")
-        .select(
-          "product_id, image_url, alt_text, is_primary, display_order"
-        )
-        .in("product_id", productIds)
-        .order("display_order", { ascending: true });
+  .from("product_images")
+  .select(
+    "id, product_id, image_url, alt_text, is_primary, display_order"
+  )
+  .in("product_id", productIds)
+  .order("display_order", { ascending: true });
 
       if (!active) return;
 
@@ -130,8 +136,13 @@ export default function HomePageExperience() {
             description:
               product.description ||
               "Discover this POM'S footwear design.",
-            imageUrl: primaryImage?.image_url ?? null,
-            imageAlt: primaryImage?.alt_text || product.name,
+              imageUrl: primaryImage?.image_url ?? null,
+              imageAlt: primaryImage?.alt_text || product.name,
+              images: productImages.map((image) => ({
+                id: image.id,
+                image_url: image.image_url,
+                alt_text: image.alt_text || product.name,
+              })),
           };
         }
       );
@@ -459,7 +470,7 @@ export default function HomePageExperience() {
               </p>
 
               <h2 className="font-serif text-4xl text-[var(--foreground)] sm:text-5xl">
-                The Featured Edit
+              The Featured Products
               </h2>
 
               <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--foreground-muted)]">
@@ -515,7 +526,7 @@ export default function HomePageExperience() {
           featuredProducts.length === 0 && (
             <div className="mt-12 border border-[var(--border)] p-12 text-center">
               <p className="font-serif text-xl text-[var(--foreground)]">
-                The featured edit is being prepared.
+              Featured products are being prepared.
               </p>
 
               <p className="mt-3 text-sm text-[var(--foreground-muted)]">
@@ -548,11 +559,10 @@ export default function HomePageExperience() {
                       </div>
 
                       {item.imageUrl ? (
-                        <PomsImageLightbox
-                          src={item.imageUrl}
-                          alt={item.imageAlt}
-                          aspectRatio="portrait"
-                        />
+                        <PomsProductGallery
+                        images={item.images}
+                        productName={item.name}
+                      />
                       ) : (
                         <div className="flex aspect-[4/5] items-center justify-center border border-[var(--border)] bg-[var(--surface)] p-6 text-center">
                           <div>
