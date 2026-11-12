@@ -384,9 +384,12 @@ export default function CataloguePage() {
     </div>
   </div>
 )}
-                  <h2 className="font-serif text-xl font-medium text-[var(--foreground)] transition group-hover:text-[var(--gold)]">
-                    {item.name}
-                  </h2>
+                  <Link
+  href={`/product/${item.slug}`}
+  className="font-serif text-xl font-medium text-[var(--foreground)] transition group-hover:text-[var(--gold)]"
+>
+  {item.name}
+</Link>
 
                   <div className="mt-3 space-y-1 text-xs text-[var(--foreground-muted)]">
                     <p>

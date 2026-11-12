@@ -4,6 +4,7 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { Upload, CheckCircle2, ShieldAlert, ArrowRight} from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/client";
 
 export default function CustomDesignPage() {
   const { t } = useLanguage();
@@ -11,6 +12,8 @@ export default function CustomDesignPage() {
   const [previews, setPreviews] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [referenceCode, setReferenceCode] = useState<string>("");
+  const [saving, setSaving] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -26,30 +29,79 @@ export default function CustomDesignPage() {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const selectedFiles = Array.from(e.target.files);
+      const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+      if (images.length + selectedFiles.length > 5) {
+        setSubmitError("Please upload no more than five reference images.");
+        e.target.value = "";
+        return;
+      }
+      const invalidFile = selectedFiles.find(
+        (file) => !allowedTypes.includes(file.type) || file.size > 15 * 1024 * 1024
+      );
+      if (invalidFile) {
+        setSubmitError("Use JPG, PNG or WEBP images, up to 15 MB each.");
+        e.target.value = "";
+        return;
+      }
+      setSubmitError("");
       setImages((prev) => [...prev, ...selectedFiles]);
-
       const newPreviews = selectedFiles.map((file) => URL.createObjectURL(file));
       setPreviews((prev) => [...prev, ...newPreviews]);
+      e.target.value = "";
     }
   };
 
   const removeImage = (index: number) => {
+    if (previews[index]) URL.revokeObjectURL(previews[index]);
     setImages((prev) => prev.filter((_, i) => i !== index));
     setPreviews((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    setSubmitError("");
 
     if (images.length === 0) {
-      alert("Please upload at least one reference shoe photograph or design sketch.");
+      setSubmitError("Please upload at least one reference shoe photograph or design sketch.");
       return;
     }
 
-    // Generate production reference code (e.g. POMS-CD-2026-XXXX)
-    const code = `POMS-CD-${Date.now().toString().slice(-6)}`;
-    setReferenceCode(code);
-    setSubmitted(true);
+    setSaving(true);
+    try {
+      const supabase = createClient();
+      const referenceImagePaths: string[] = [];
+
+      for (const image of images) {
+        const uploadTicketResponse = await fetch("/api/public-inquiries", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type: "custom-design-upload", contentType: image.type }),
+        });
+        const uploadTicket = await uploadTicketResponse.json();
+        if (!uploadTicketResponse.ok) throw new Error(uploadTicket.error || "Could not prepare image upload.");
+
+        const { error: uploadError } = await supabase.storage
+          .from("custom-design-references")
+          .uploadToSignedUrl(uploadTicket.path, uploadTicket.token, image, { contentType: image.type });
+        if (uploadError) throw new Error("A reference image could not be uploaded. Please try again.");
+        referenceImagePaths.push(uploadTicket.path);
+      }
+
+      const response = await fetch("/api/public-inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "custom-design", ...form, referenceImagePaths }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Your request could not be submitted.");
+
+      setReferenceCode(result.referenceCode);
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (submitted) {
@@ -318,8 +370,14 @@ export default function CustomDesignPage() {
             />
           </div>
 
-          <button type="submit" className="btn-gold w-full">
-            Submit Custom Design Request <ArrowRight className="h-4 w-4" />
+          {submitError && (
+            <p role="alert" className="border border-red-500/40 bg-red-500/10 p-3 text-xs text-red-300">
+              {submitError}
+            </p>
+          )}
+          <button type="submit" disabled={saving} className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-60">
+            {saving ? "Submitting securely..." : "Submit Custom Design Request"}
+            {!saving && <ArrowRight className="h-4 w-4" />}
           </button>
         </form>
       </div>

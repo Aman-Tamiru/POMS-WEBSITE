@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/Logo";
+import PomsMegaMenu from "@/components/navigation/PomsMegaMenu";
 import { useTheme } from "@/components/ThemeProvider";
 import {
   useLanguage,
@@ -93,29 +94,59 @@ export function Header() {
           <Logo />
         </Link>
 
-        {/* Desktop Navigation */}
+        
+        {/* Premium Desktop Navigation */}
         <nav
           className="hidden items-center gap-7 lg:flex"
           aria-label={t("nav.primaryNavigation")}
         >
-          {navLinks.map((item) => {
-            const active = pathname === item.href;
+          <Link
+            href="/"
+            className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+              pathname === "/"
+                ? "font-bold text-[var(--gold)]"
+                : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+            }`}
+          >
+            {t("nav.home")}
+          </Link>
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`font-serif text-[0.72rem] tracking-[0.24em] uppercase transition-colors ${
-                  active
-                    ? "text-[var(--gold)] font-bold"
-                    : "text-[var(--foreground-muted)] hover:text-[var(--foreground)]"
-                }`}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
+          <PomsMegaMenu />
+
+          <Link
+            href="/custom-design"
+            className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+              pathname === "/custom-design"
+                ? "font-bold text-[var(--gold)]"
+                : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+            }`}
+          >
+            {t("nav.customDesign")}
+          </Link>
+
+          <Link
+            href="/wholesale"
+            className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+              pathname === "/wholesale"
+                ? "font-bold text-[var(--gold)]"
+                : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+            }`}
+          >
+            {t("nav.wholesale")}
+          </Link>
+
+          <Link
+            href="/authenticity"
+            className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+              pathname === "/authenticity"
+                ? "font-bold text-[var(--gold)]"
+                : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+            }`}
+          >
+            {t("nav.authenticity")}
+          </Link>
         </nav>
+
 
         {/* Header Controls */}
         <div className="flex items-center gap-3">
@@ -200,77 +231,78 @@ export function Header() {
         </div>
       </div>
 
+      
       {/* Mobile Navigation Backdrop */}
       {open && (
         <button
           type="button"
           aria-label="Close navigation"
-          className="fixed inset-0 z-[60] bg-black/45 backdrop-blur-[2px] lg:hidden"
+          className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-[1px] lg:hidden"
           onClick={() => setOpen(false)}
         />
       )}
 
-      {/* Mobile Navigation Drawer */}
+      {/* Premium Half-Width Mobile Drawer */}
       {open && (
         <aside
           id="mobile-navigation-drawer"
           role="dialog"
           aria-modal="true"
           aria-label={t("nav.mobileNavigation")}
-          className="fixed inset-y-0 left-0 z-[70] flex w-[320px] max-w-[88vw] flex-col overflow-y-auto border-r border-[var(--border)] bg-[var(--background)] px-5 pb-7 pt-5 text-[var(--foreground)] shadow-2xl lg:hidden"
+          className="fixed inset-y-0 left-0 z-[70] flex w-1/2 min-w-[180px] max-w-[420px] flex-col overflow-y-auto border-r border-[var(--gold)]/25 bg-[var(--background)] px-4 pb-6 pt-5 text-[var(--foreground)] shadow-2xl lg:hidden"
         >
-          {/* Drawer Header: Logo and Close Button */}
-          <div className="mb-8 flex min-h-[52px] items-center justify-between border-b border-[var(--border)] pb-5">
+          {/* Drawer Branding */}
+          <div className="mb-6 flex items-center justify-between gap-2 border-b border-[var(--border)] pb-4">
             <Link
               href="/"
               onClick={() => setOpen(false)}
               aria-label={t("nav.home")}
-              className="flex min-w-0 items-center"
+              className="min-w-0"
             >
-              <Logo />
+              <Logo className="h-9 w-auto max-w-full" />
             </Link>
 
             <button
               type="button"
               onClick={() => setOpen(false)}
               aria-label={t("nav.closeMenu")}
-              className="ml-3 flex h-9 w-9 shrink-0 items-center justify-center rounded-sm border border-[var(--border)] text-[var(--gold)] transition hover:bg-[var(--surface-hover)]"
+              className="flex h-8 w-8 shrink-0 items-center justify-center border border-[var(--border)] text-[var(--gold)]"
             >
-              <X className="h-5 w-5" />
+              <X className="h-4 w-4" />
             </button>
           </div>
 
           <nav
-            className="flex flex-col gap-4"
+            className="flex flex-1 flex-col"
             aria-label={t("nav.mobileNavigation")}
           >
-            {/* Brand Heading */}
-            <p className="mb-1 text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[var(--gold)]">
+            <p className="mb-4 text-[9px] font-semibold uppercase tracking-[0.17em] text-[var(--gold)]">
               POMS INTERNATIONAL
             </p>
 
-            {/* Main Navigation Links */}
-            {navLinks.map((item) => (
+            {navLinks.map((item, index) => (
               <Link
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
                 aria-current={pathname === item.href ? "page" : undefined}
-                className={`border-b border-[var(--border)] pb-3 font-serif text-sm tracking-[0.16em] uppercase transition-colors ${
+                className={`border-b border-[var(--border)] py-3 text-[10px] font-medium leading-5 tracking-[0.08em] uppercase transition-colors ${
                   pathname === item.href
-                    ? "text-[var(--gold)] font-semibold"
+                    ? "text-[var(--gold)]"
                     : "text-[var(--foreground)] hover:text-[var(--gold)]"
                 }`}
               >
+                <span className="mb-1 block text-[8px] tracking-widest text-[var(--foreground-muted)]">
+                  0{index + 1}
+                </span>
                 {item.label}
               </Link>
             ))}
 
-            {/* Support Section */}
-            <div className="my-2 h-px w-full bg-[var(--border)]" />
+            <div className="my-5 h-px bg-[var(--border)]" />
 
-            <p className="mb-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--gold)]">
-              Information &amp; Support
+            <p className="mb-3 text-[8px] font-semibold uppercase tracking-[0.14em] text-[var(--gold)]">
+              Information
             </p>
 
             {supportLinks.map((item) => (
@@ -278,25 +310,25 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="py-1 text-sm tracking-wide text-[var(--foreground-muted)] transition-colors hover:text-[var(--gold)]"
+                className="py-2 text-[9px] leading-4 text-[var(--foreground-muted)] transition-colors hover:text-[var(--gold)]"
               >
                 {item.label}
               </Link>
             ))}
 
-            {/* Admin Portal */}
-            <div className="mt-3 border-t border-[var(--border)] pt-5">
+            <div className="mt-auto border-t border-[var(--border)] pt-5">
               <Link
                 href="/admin"
                 onClick={() => setOpen(false)}
-                className="text-xs font-semibold uppercase tracking-widest text-[var(--gold)] transition-colors hover:text-[var(--foreground)]"
+                className="text-[9px] font-medium uppercase tracking-widest text-[var(--gold)]/80 hover:text-[var(--gold)]"
               >
-                {t("nav.adminPortal")}
+                Admin Portal
               </Link>
             </div>
           </nav>
         </aside>
       )}
+
     </header>
   );
 }

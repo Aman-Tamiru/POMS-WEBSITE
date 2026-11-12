@@ -5,6 +5,8 @@ import { Package, Globe2, FileText, CheckCircle2, ArrowRight } from "lucide-reac
 
 export default function WholesalePage() {
   const [submitted, setSubmitted] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [form, setForm] = useState({
     companyName: "",
     buyerName: "",
@@ -17,9 +19,24 @@ export default function WholesalePage() {
     notes: "",
   });
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSaving(true);
+    setSubmitError("");
+    try {
+      const response = await fetch("/api/public-inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type: "wholesale", ...form }),
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || "Your inquiry could not be submitted.");
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Something went wrong. Please try again.");
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -205,8 +222,14 @@ export default function WholesalePage() {
               />
             </div>
 
-            <button type="submit" className="btn-gold w-full">
-              Transmit Wholesale Inquiry <ArrowRight className="h-4 w-4" />
+            {submitError && (
+              <p role="alert" className="border border-red-500/40 bg-red-500/10 p-3 text-xs text-red-300">
+                {submitError}
+              </p>
+            )}
+            <button type="submit" disabled={saving} className="btn-gold w-full disabled:cursor-not-allowed disabled:opacity-60">
+              {saving ? "Submitting inquiry..." : "Transmit Wholesale Inquiry"}
+              {!saving && <ArrowRight className="h-4 w-4" />}
             </button>
           </form>
         )}

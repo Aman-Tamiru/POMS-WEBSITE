@@ -1,137 +1,183 @@
+
 "use client";
 
 import Link from "next/link";
+import {
+  ArrowUpRight,
+  MapPin,
+  Phone,
+  Mail,
+} from "lucide-react";
 import { Logo } from "@/components/Logo";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export function Footer() {
   const { t } = useLanguage();
 
+  const collectionLinks = [
+    { href: "/collection", label: t("nav.collection") },
+    { href: "/catalogue", label: t("nav.catalogue") },
+    { href: "/custom-design", label: t("nav.customDesign") },
+    { href: "/wholesale", label: t("nav.wholesale") },
+    { href: "/authenticity", label: t("nav.authenticity") },
+  ];
+
+  const supportLinks = [
+    { href: "/about", label: t("nav.about") },
+    { href: "/contact", label: t("nav.contact") },
+    { href: "/size-guide", label: t("nav.sizeGuide") },
+    { href: "/shipping", label: t("footer.shippingCustoms") },
+    { href: "/faq", label: t("footer.faq") },
+  ];
+
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--background-secondary)] text-[var(--foreground)]">
-      <div className="mx-auto max-w-7xl px-5 py-16 md:px-10 lg:py-20">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Brand Column */}
-          <div className="space-y-4">
+
+      {/* Main Footer */}
+      <div className="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-12 lg:py-14">
+
+        <div className="grid grid-cols-2 gap-x-7 gap-y-10 lg:grid-cols-4 lg:gap-12">
+
+          {/* Brand */}
+          <div className="col-span-2 space-y-4 lg:col-span-1">
             <Logo />
-            <p className="mt-3 font-serif text-sm italic leading-relaxed text-[var(--foreground-muted)]">
+
+            <p className="max-w-xs font-serif text-sm italic leading-7 text-[var(--foreground-muted)]">
               {t("footer.brandTagline")}
             </p>
-            <div className="pt-2 text-xs text-[var(--foreground-muted)] space-y-1">
+
+            <div className="space-y-2 pt-2 text-xs text-[var(--foreground-muted)]">
               <p>{t("footer.manufacturing")}</p>
-              <p>{t("footer.location")}</p>
+
+              <p className="flex items-start gap-2">
+                <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--gold)]" />
+                {t("footer.location")}
+              </p>
             </div>
+
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 pt-2 text-[9px] uppercase tracking-[0.2em] text-[var(--gold)] transition hover:text-[var(--foreground)]"
+            >
+              Discover our story
+              <ArrowUpRight size={13} />
+            </Link>
           </div>
 
-          {/* Quick Links */}
-          <div className="space-y-3">
-            <p className="font-serif text-xs uppercase tracking-[0.25em] text-[var(--gold)]">
+          {/* Collections and Shopping */}
+          <div>
+            <h3 className="mb-5 font-serif text-xs uppercase tracking-[0.22em] text-[var(--gold)]">
               {t("nav.collection")}
-            </p>
-            <ul className="space-y-2 text-sm text-[var(--foreground-muted)]">
-              <li>
-                <Link href="/collection" className="hover:text-[var(--gold)] transition">
-                  {t("nav.collection")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/catalogue" className="hover:text-[var(--gold)] transition">
-                  {t("nav.catalogue")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/custom-design" className="hover:text-[var(--gold)] transition">
-                  {t("nav.customDesign")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/wholesale" className="hover:text-[var(--gold)] transition">
-                  {t("nav.wholesale")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/authenticity" className="hover:text-[var(--gold)] transition">
-                  {t("nav.authenticity")}
-                </Link>
-              </li>
+            </h3>
+
+            <ul className="space-y-3">
+              {collectionLinks.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-xs leading-5 text-[var(--foreground-muted)] transition hover:text-[var(--gold)]"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Customer Service & Sizing */}
-          <div className="space-y-3">
-            <p className="font-serif text-xs uppercase tracking-[0.25em] text-[var(--gold)]">
+          {/* Assistance */}
+          <div>
+            <h3 className="mb-5 font-serif text-xs uppercase tracking-[0.22em] text-[var(--gold)]">
               {t("footer.assistanceFit")}
-            </p>
-            <ul className="space-y-2 text-sm text-[var(--foreground-muted)]">
-              <li>
-                <Link href="/size-guide" className="hover:text-[var(--gold)] transition">
-                  {t("nav.sizeGuide")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/shipping" className="hover:text-[var(--gold)] transition">
-                  {t("footer.shippingCustoms")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-[var(--gold)] transition">
-                  {t("nav.about")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[var(--gold)] transition">
-                  {t("nav.contact")}
-                </Link>
-              </li>
-              <li>
-                <Link href="/faq" className="hover:text-[var(--gold)] transition">
-                  {t("footer.faq")}
-                </Link>
-              </li>
+            </h3>
+
+            <ul className="space-y-3">
+              {supportLinks.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-xs leading-5 text-[var(--foreground-muted)] transition hover:text-[var(--gold)]"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Details */}
-          <div className="space-y-3">
-            <p className="font-serif text-xs uppercase tracking-[0.25em] text-[var(--gold)]">
+          {/* Contact */}
+          <div className="col-span-2 space-y-4 lg:col-span-1">
+            <h3 className="font-serif text-xs uppercase tracking-[0.22em] text-[var(--gold)]">
               {t("footer.globalCommunications")}
+            </h3>
+
+            <p className="text-xs leading-6 text-[var(--foreground-muted)]">
+              {t("footer.wholesaleInquiries")}
             </p>
-            <div className="space-y-2 text-sm text-[var(--foreground-muted)]">
-              <p>{t("footer.wholesaleInquiries")}</p>
-              <p className="font-medium text-[var(--gold)]">+251 920 237 030</p>
-              <p>{t("footer.whatsappExport")}</p>
-              <div className="pt-2">
-                <Link
-                  href="/custom-design"
-                  className="btn-gold-outline text-[0.65rem] py-2 px-4 inline-flex"
-                >
-                  {t("footer.startCustomOrder")}
-                </Link>
-              </div>
-            </div>
+
+            <a
+              href="tel:+251920237030"
+              className="flex items-center gap-3 text-sm text-[var(--foreground)] transition hover:text-[var(--gold)]"
+            >
+              <Phone className="h-4 w-4 text-[var(--gold)]" />
+              +251 920 237 030
+            </a>
+
+            <p className="text-xs leading-6 text-[var(--foreground-muted)]">
+              {t("footer.whatsappExport")}
+            </p>
+
+            <Link
+              href="/custom-design"
+              className="btn-gold-outline inline-flex items-center gap-2 px-4 py-3 text-[9px] uppercase tracking-[0.15em]"
+            >
+              {t("footer.startCustomOrder")}
+              <ArrowUpRight size={13} />
+            </Link>
           </div>
         </div>
 
-        {/* Bottom Bar with discreet Admin link */}
-        <div className="mt-14 pt-8 border-t border-[var(--border)]/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--foreground-muted)]">
-          <p>{t("footer.copyright")}</p>
+        {/* Global Contact and Legal Bar */}
+        <div className="mt-12 flex flex-col gap-5 border-t border-[var(--border)]/60 pt-6 sm:flex-row sm:items-center sm:justify-between">
 
-          <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:text-[var(--gold)] transition">
+          <p className="text-[10px] leading-5 text-[var(--foreground-muted)]">
+            {t("footer.copyright")}
+          </p>
+
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-[10px] text-[var(--foreground-muted)]">
+
+            <Link
+              href="/privacy"
+              className="transition hover:text-[var(--gold)]"
+            >
               {t("footer.privacyPolicy")}
             </Link>
-            <Link href="/terms" className="hover:text-[var(--gold)] transition">
+
+            <Link
+              href="/terms"
+              className="transition hover:text-[var(--gold)]"
+            >
               {t("footer.termsConditions")}
             </Link>
-            {/* Discreet Admin Portal link */}
+
             <Link
               href="/admin"
-              className="text-[var(--gold)]/60 hover:text-[var(--gold)] transition"
               title={t("footer.restrictedStaffTitle")}
+              className="transition hover:text-[var(--gold)]"
             >
               {t("footer.adminLink")}
             </Link>
           </div>
+        </div>
+
+        {/* Brand Signature */}
+        <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t border-[var(--border)]/40 pt-6 text-center sm:flex-row sm:text-left">
+          <span className="font-serif text-[10px] uppercase tracking-[0.35em] text-[var(--gold)]">
+            POM&apos;S INTERNATIONAL
+          </span>
+
+          <span className="text-[9px] uppercase tracking-[0.2em] text-[var(--foreground-muted)]">
+            Addis Ababa · Ethiopia
+          </span>
         </div>
       </div>
     </footer>

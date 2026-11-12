@@ -1321,3 +1321,230 @@
       transform: none;
     }
   }
+
+
+/* POMS — True Light Theme: Cinematic Hero */
+
+[data-theme="light"] .poms-cinematic-hero {
+  background:
+    radial-gradient(
+      ellipse at 72% 46%,
+      rgba(184, 146, 72, 0.13),
+      transparent 38%
+    ),
+    radial-gradient(
+      ellipse at 15% 85%,
+      rgba(184, 146, 72, 0.08),
+      transparent 35%
+    ),
+    linear-gradient(145deg, #fffefa 0%, #f5efe4 100%) !important;
+  color: #1c1a17;
+}
+
+[data-theme="light"] .poms-cinematic-hero::before {
+  background-image:
+    linear-gradient(rgba(120, 95, 55, .035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 95, 55, .035) 1px, transparent 1px);
+}
+
+/* Hero text */
+[data-theme="light"] .poms-hero-copy {
+  color: #1c1a17;
+}
+
+[data-theme="light"] .poms-hero-copy h1,
+[data-theme="light"] .poms-hero-copy h2 {
+  color: #1c1a17;
+}
+
+[data-theme="light"] .poms-hero-copy p {
+  color: #666159;
+}
+
+/* Hero decorative elements */
+[data-theme="light"] .poms-hero-grain {
+  opacity: .025;
+}
+
+/* Hero buttons */
+[data-theme="light"] .poms-cinematic-hero a {
+  color: #29251e;
+}
+
+[data-theme="light"] .poms-cinematic-hero a:hover {
+  border-color: #b89248;
+}
+
+/* POMS Editorial Wholesale Band — Automatic Theme Switching */
+
+/* Dark mode */
+.poms-editorial-theme-aware {
+  background:
+    radial-gradient(
+      ellipse at 80% 45%,
+      rgba(184, 146, 72, 0.16),
+      transparent 40%
+    ),
+    linear-gradient(135deg, #090909 0%, #171511 100%);
+  color: #f5f0e6;
+  transition: background 300ms ease, color 300ms ease;
+}
+
+.poms-editorial-theme-aware .poms-editorial-title {
+  color: #f5f0e6;
+}
+
+.poms-editorial-theme-aware .poms-editorial-description {
+  color: #c8c1b5;
+}
+
+.poms-editorial-theme-aware .poms-editorial-eyebrow {
+  color: #c5a15b;
+}
+
+.poms-editorial-theme-aware .poms-editorial-cta {
+  color: #f5f0e6;
+  border-color: #b89248;
+}
+
+.poms-editorial-theme-aware .poms-editorial-cta:hover {
+  color: #d6b36b;
+}
+
+/* Light mode */
+[data-theme="light"] .poms-editorial-theme-aware {
+  background:
+    radial-gradient(
+      ellipse at 80% 45%,
+      rgba(184, 146, 72, 0.12),
+      transparent 40%
+    ),
+    linear-gradient(135deg, #fffefa 0%, #f4efe5 100%);
+  color: #201d18;
+}
+
+[data-theme="light"] .poms-editorial-theme-aware .poms-editorial-title {
+  color: #201d18;
+}
+
+[data-theme="light"] .poms-editorial-theme-aware .poms-editorial-description {
+  color: #625c52;
+}
+
+[data-theme="light"] .poms-editorial-theme-aware .poms-editorial-eyebrow {
+  color: #987333;
+}
+
+[data-theme="light"] .poms-editorial-theme-aware .poms-editorial-cta {
+  color: #29251e;
+  border-color: #987333;
+}
+
+[data-theme="light"] .poms-editorial-theme-aware .poms-editorial-cta:hover {
+  color: #987333;
+}
+
+/* POMS — Editorial Page Transitions */
+
+.poms-page-transition {
+  animation: poms-page-fade 520ms ease-out both;
+}
+
+.poms-page-transition--product {
+  animation-name: poms-product-enter;
+  animation-duration: 700ms;
+}
+
+.poms-page-transition--collection {
+  animation-name: poms-collection-enter;
+  animation-duration: 650ms;
+}
+
+.poms-page-transition--brand {
+  animation-name: poms-brand-enter;
+  animation-duration: 750ms;
+}
+
+.poms-page-transition--wholesale {
+  animation-name: poms-wholesale-enter;
+  animation-duration: 700ms;
+}
+
+.poms-page-transition--custom-design {
+  animation-name: poms-custom-enter;
+  animation-duration: 750ms;
+}
+
+.poms-page-transition--admin {
+  animation: none;
+}
+
+@keyframes poms-page-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes poms-product-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.99);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes poms-collection-enter {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes poms-brand-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes poms-wholesale-enter {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 8% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes poms-custom-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poms-page-transition {
+    animation: none !important;
+  }
+}

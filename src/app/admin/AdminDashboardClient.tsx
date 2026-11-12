@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import OwnerProfileEditor from "@/components/admin/OwnerProfileEditor";
 import { createClient } from "@/lib/supabase/client";
 import {
   Package,
@@ -61,6 +62,7 @@ const handleLogout = async () => {
     { id: "collections", label: "Collection Manager", icon: Layers, cat: "Catalogue" },
     { id: "media", label: "Media Library", icon: ImageIcon, cat: "Assets" },
     { id: "designs", label: "Custom Design Inquiries", icon: Compass, cat: "Sales" },
+    { id: "wholesaleInquiries", label: "Wholesale Inquiries", icon: Package, cat: "Sales" },
     { id: "messages", label: "Customer Messages", icon: MessageSquare, cat: "Sales" },
     { id: "customers", label: "Customer Directory", icon: Users, cat: "Sales" },
     { id: "quotations", label: "Quotations (5 Currencies)", icon: FileSpreadsheet, cat: "Sales" },
@@ -82,7 +84,9 @@ const adminRoutes: Record<string, string> = {
   products: "/admin/products",
   collections: "/admin/collections",
   media: "/admin/media",
+  designs: "/admin/inquiries",
   inquiries: "/admin/inquiries",
+  wholesaleInquiries: "/admin/wholesale-inquiries",
   messages: "/admin/messages",
   customers: "/admin/customers",
   quotations: "/admin/quotations",
@@ -115,24 +119,27 @@ const adminRoutes: Record<string, string> = {
         </div>
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/"
-            target="_blank"
-            className="flex items-center gap-1 border border-[var(--border)] px-2.5 py-1 text-[11px] text-[var(--foreground)] hover:border-[var(--gold)]"
-          >
-            <Eye className="h-3 w-3 text-[var(--gold)]" />
-            <span className="hidden sm:inline">Storefront</span>
-          </Link>
-          <button
-  type="button"
-  onClick={handleLogout}
-  className="flex items-center gap-1 border border-[var(--border)] px-2.5 py-1 text-[11px] text-[var(--foreground-muted)] hover:text-red-400"
-  aria-label="Sign out"
-  title="Sign out"
->
-  <LogOut className="h-3 w-3" />
-</button>
-        </div>
+  <OwnerProfileEditor />
+
+  <Link
+    href="/"
+    target="_blank"
+    className="flex items-center gap-1 border border-[var(--border)] px-2.5 py-1 text-[11px] text-[var(--foreground)] hover:border-[var(--gold)]"
+  >
+    <Eye className="h-3 w-3 text-[var(--gold)]" />
+    <span className="hidden sm:inline">Storefront</span>
+  </Link>
+
+  <button
+    type="button"
+    onClick={handleLogout}
+    className="flex items-center gap-1 border border-[var(--border)] px-2.5 py-1 text-[11px] text-[var(--foreground-muted)] hover:text-red-400"
+    aria-label="Sign out"
+    title="Sign out"
+  >
+    <LogOut className="h-3 w-3" />
+  </button>
+</div>
       </header>
 
       {/* Main Container */}

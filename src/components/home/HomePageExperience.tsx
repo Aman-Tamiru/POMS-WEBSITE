@@ -11,7 +11,7 @@ import PomsSectionHeading from "@/components/brand/PomsSectionHeading";
 import PomsEditorialBand from "@/components/brand/PomsEditorialBand";
 import PomsReveal from "@/components/brand/PomsReveal";
 import PomsImageLightbox from "@/components/brand/PomsImageLightbox";
-
+import PomsCraftsmanshipStory from "@/components/home/sections/PomsCraftsmanshipStory";
 interface FeaturedProduct {
   id: string;
   name: string;
@@ -154,9 +154,7 @@ export default function HomePageExperience() {
   return (
     <main className="poms-homepage overflow-hidden pb-20">
  <PomsCinematicHero />
-      {/* =========================================
-          01 — CINEMATIC HERO
-      ========================================= */}
+      
 
       <section className="poms-home-hero relative">
 
@@ -334,6 +332,14 @@ export default function HomePageExperience() {
       {/* =========================================
           03 — COLLECTION DISCOVERY
       ========================================= */}
+      {/* =========================================
+    ETHIOPIAN CRAFTSMANSHIP STORY
+========================================= */}
+
+<PomsCraftsmanshipStory
+  imageUrl={heroProduct?.imageUrl}
+  imageAlt={heroProduct?.imageAlt || "POM'S featured footwear design"}
+/>
 
       <section className="poms-collection-section px-6 py-24 sm:px-10 lg:px-16">
 
@@ -571,9 +577,12 @@ export default function HomePageExperience() {
                         {item.category}
                       </p>
 
-                      <h3 className="mt-3 font-serif text-xl text-[var(--foreground)] transition-colors group-hover:text-[var(--gold)]">
-                        {item.name}
-                      </h3>
+                      <Link
+  href={`/product/${item.slug}`}
+  className="mt-3 block font-serif text-xl text-[var(--foreground)] transition-colors group-hover:text-[var(--gold)] hover:text-[var(--gold)]"
+>
+  {item.name}
+</Link>
 
                       <p className="mt-3 line-clamp-3 text-xs leading-6 text-[var(--foreground-muted)]">
                         {item.description}
@@ -586,7 +595,7 @@ export default function HomePageExperience() {
                         </span>
 
                         <Link
-                          href="/custom-design"
+  href={`/product/${item.slug}`}
                           className="inline-flex items-center gap-2 text-[9px] uppercase tracking-[0.15em] text-[var(--foreground-muted)] transition hover:text-[var(--gold)]"
                         >
                           Inquire
@@ -703,7 +712,7 @@ export default function HomePageExperience() {
           description={t("wholesale.description")}
           buttonLabel={t("wholesale.ctaQuote")}
           href="/wholesale"
-          variant="dark"
+          variant="light"
         />
 
         <div className="mx-auto grid max-w-7xl gap-5 px-6 py-16 sm:grid-cols-3 sm:px-10 lg:px-16">

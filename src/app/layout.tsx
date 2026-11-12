@@ -4,6 +4,7 @@ import { Cinzel, Playfair_Display, Cormorant_Garamond, Inter } from "next/font/g
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import PomsPageTransition from "@/components/brand/PomsPageTransition";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import "./globals.css";
 
@@ -74,7 +75,9 @@ export default function RootLayout({
         <ThemeProvider>
           <LanguageProvider>
             <Header />
-            <main className="flex-1 pt-[65px]">{children}</main>
+            <main className="flex-1 pt-[65px]">
+  <PomsPageTransition>{children}</PomsPageTransition>
+</main>
             <Footer />
           </LanguageProvider>
         </ThemeProvider>
