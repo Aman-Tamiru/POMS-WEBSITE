@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight, Download, ExternalLink, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 export interface ProductGalleryImage {
   id: string;
@@ -15,42 +15,32 @@ interface Props {
   productName: string;
 }
 
-export default function PomsProductGallery({ images, productName }: Props) {
+export default function PomsProductGallery({
+  images,
+  productName,
+}: Props) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const activeImage = images[activeIndex];
 
-  async function downloadActiveImage() {
-    try {
-      const response = await fetch(activeImage.image_url);
-      if (!response.ok) throw new Error("Image download failed");
-      const blob = await response.blob();
-      const objectUrl = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      const safeName = productName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "poms-product";
-      link.href = objectUrl;
-      link.download = `${safeName}-image-${activeIndex + 1}`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
-    } catch {
-      window.open(activeImage.image_url, "_blank", "noopener,noreferrer");
-    }
-  }
-
   useEffect(() => {
     if (!lightboxOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setLightboxOpen(false);
-      if (event.key === "ArrowRight")
+      if (event.key === "Escape") {
+        setLightboxOpen(false);
+      }
+
+      if (event.key === "ArrowRight" && images.length > 1) {
         setActiveIndex((current) => (current + 1) % images.length);
-      if (event.key === "ArrowLeft")
-        setActiveIndex((current) =>
-          (current - 1 + images.length) % images.length
+      }
+
+      if (event.key === "ArrowLeft" && images.length > 1) {
+        setActiveIndex(
+          (current) => (current - 1 + images.length) % images.length
         );
+      }
     };
 
     document.addEventListener("keydown", handleKeyDown);
@@ -122,21 +112,21 @@ export default function PomsProductGallery({ images, productName }: Props) {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label={`${productName} image gallery`}
+          aria-label={`${productName} image viewer`}
           onClick={() => setLightboxOpen(false)}
-          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/95 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/10 p-4"
         >
           <button
             type="button"
             onClick={() => setLightboxOpen(false)}
             aria-label="Close image viewer"
-            className="absolute right-5 top-5 z-20 border border-white/30 p-3 text-white hover:text-[var(--gold)]"
+            className="absolute right-5 top-5 z-20 rounded-full border border-[var(--border)] bg-[var(--background)]/80 p-3 text-[var(--foreground)]"
           >
-            <X />
+            <X size={22} />
           </button>
 
           <div
-            className="relative flex h-[85vh] w-full max-w-6xl items-center justify-center"
+            className="relative flex h-[92vh] w-full items-center justify-center"
             onClick={(event) => event.stopPropagation()}
           >
             {images.length > 1 && (
@@ -149,7 +139,7 @@ export default function PomsProductGallery({ images, productName }: Props) {
                     )
                   }
                   aria-label="Previous image"
-                  className="absolute left-0 z-10 border border-white/30 bg-black/60 p-3 text-white"
+                  className="absolute left-2 z-10 rounded-full bg-[var(--background)]/80 p-3 text-[var(--foreground)]"
                 >
                   <ChevronLeft />
                 </button>
@@ -160,7 +150,7 @@ export default function PomsProductGallery({ images, productName }: Props) {
                     setActiveIndex((activeIndex + 1) % images.length)
                   }
                   aria-label="Next image"
-                  className="absolute right-0 z-10 border border-white/30 bg-black/60 p-3 text-white"
+                  className="absolute right-2 z-10 rounded-full bg-[var(--background)]/80 p-3 text-[var(--foreground)]"
                 >
                   <ChevronRight />
                 </button>
@@ -171,33 +161,9 @@ export default function PomsProductGallery({ images, productName }: Props) {
             <img
               src={activeImage.image_url}
               alt={activeImage.alt_text || productName}
-              className="max-h-full max-w-[85%] object-contain"
+              className="max-h-[90vh] max-w-[92vw] object-contain"
             />
-
-            <div className="absolute bottom-2 right-2 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={downloadActiveImage}
-                className="flex items-center gap-2 border border-white/30 bg-black/80 px-4 py-3 text-[9px] uppercase tracking-widest text-white hover:text-[var(--gold)]"
-              >
-                Save image
-                <Download size={14} />
-              </button>
-              <a
-                href={activeImage.image_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 border border-white/30 bg-black/80 px-4 py-3 text-[9px] uppercase tracking-widest text-white hover:text-[var(--gold)]"
-              >
-                Open original
-                <ExternalLink size={14} />
-              </a>
-            </div>
           </div>
-
-          <p className="absolute bottom-5 left-5 text-xs text-white/70">
-            {activeIndex + 1} / {images.length}
-          </p>
         </div>
       )}
     </div>

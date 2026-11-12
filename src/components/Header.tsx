@@ -121,7 +121,16 @@ export function Header() {
   >
     {t("nav.collection")}
   </Link>
-
+  <Link
+  href="/catalogue"
+  className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${
+    pathname === "/catalogue"
+      ? "font-bold text-[var(--gold)]"
+      : "text-[var(--foreground-muted)] hover:text-[var(--gold)]"
+  }`}
+>
+  {t("nav.catalogue")}
+</Link>
   <Link
     href="/custom-design"
     className={`font-serif text-[0.72rem] tracking-[0.2em] uppercase transition-colors ${

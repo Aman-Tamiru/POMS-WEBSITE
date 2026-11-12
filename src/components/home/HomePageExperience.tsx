@@ -188,8 +188,11 @@ export default function HomePageExperience() {
               </p>
 
               <h1 className="max-w-3xl font-serif text-5xl font-normal leading-[1.08] tracking-tight text-[var(--foreground)] sm:text-6xl md:text-7xl xl:text-[88px]">
-                {t("hero.title")}
-              </h1>
+  Discover a World of
+  <span className="block italic text-[var(--gold)]">
+    Distinctive Design.
+  </span>
+</h1>
 
               <div className="my-8 flex items-center gap-3">
                 <span className="h-px w-14 bg-[var(--gold)]" />
